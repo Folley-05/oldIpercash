@@ -1,0 +1,35 @@
+.text-title {
+    font-size: 2em;
+    text-align: center;
+}
+.desktop-step {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+.step {
+    width: 32%;
+    background-color: #958f8fa6;
+    height: 600px;
+  }
+  .step-head {
+    padding: 2% 0px;
+    text-align: center;
+  }
+  .step-body {
+    padding: 2%;
+    overflow: hidden;
+  }
+  .step-body img {
+    display: block;
+    width: 90%;
+    margin: auto;
+  }
+  
+  li {
+    padding-bottom: 15px;
+  }
+  
+  hr {
+    margin-top: 20px;
+  }

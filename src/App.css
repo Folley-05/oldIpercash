@@ -1,11 +1,13 @@
 :root {
     --white: #FFF;
-    --gray: #958f8f;
+    --gray: #b7b1b1;
+    --second-gray: #958f8f;
     --red: #dd1a14;
     --black: #000;
     --pink: rgba(255,219,211, 0.3);
     --other-red: #dc3545;
-    --transparent-gray: rgb(149,143,143, 0.5);
+    --transparent-gray: rgb(149,143,143, 0.7);
+    --blue: #007bff;
 }
 
 html {
@@ -31,6 +33,10 @@ a:visited {
     color: inherit;
 }
 
+ul {
+    margin: 0px;
+    padding: 0px;
+}
 li {
     list-style-type: none;
 }

@@ -1,6 +1,5 @@
 .title {
     text-align: center;
-    text-transform: uppercase;
 }
 .span-red {
     color: var(--other-red);
@@ -21,6 +20,9 @@
 }
 .text-banner {
     margin: 50px auto;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 .card {
     margin: 50px auto;
@@ -55,6 +57,7 @@
         /* width: 100vw;
         height: 70vh; */
         /* overflow: hidden; */
+        padding: 4%;
         background-image: url('./assets/family.jpg');
         background-size: cover;
     }
@@ -63,11 +66,12 @@
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
+        margin: 0px auto;
     }
     .text-banner {
-        margin-right: 20px;
-        font-size: 2.5em;
         width: 50%;
+        margin-right: 20px;
+        font-size: 2.3em;
     }
     .card {
         background-color: var(--transparent-gray);
