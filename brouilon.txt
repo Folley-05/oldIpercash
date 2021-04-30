@@ -1,0 +1,27 @@
+<div className="amount">
+                        <div className="inputBox">
+                            <input type="text" id="amount"/>
+                            <label htmlFor="amount">Amount to Send*</label>
+                        </div>
+                    </div>
+                    <div className="change">
+                        <h2>1.00€==656 XAF</h2>
+                    </div>
+                        <h3>receiver's infomations</h3>
+                    <div className="form">
+                        <div className="inputBox">
+                            <input type="text" id="fullname"/>
+                            <label htmlFor="fullname">Full Name</label>
+                        </div>
+                        <div className="inputBox">
+                            <input type="phone" id="phone"/>
+                            <label htmlFor="phone">Phone Number</label>
+                        </div>
+                        <div className="inputBox">
+                            <input type="phone" id="cphone"/>
+                            <label htmlFor="cphone">Confirm Phone</label>
+                        </div>
+                        <div className="checkbox">
+                            <input type="checkbox" id="save"/>
+                            <label htmlFor="save">Save these informations</label>
+                        </div>

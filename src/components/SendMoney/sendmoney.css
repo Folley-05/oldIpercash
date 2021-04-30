@@ -20,53 +20,15 @@
 .change {
     text-align: center;
 }
+.inputBox {
+}
 h3 {
     text-align: center;
     margin-bottom: 10px;
 }
-.inputBox {
-    width: 50%;
-    position: relative;
-    height: 80px;
-}
-.inputBox input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 17px;
-    color: var(--white);
-    font-weight: bold;
-    margin-bottom: 30px;
-    border: none;
-    background: transparent;
-    border-bottom: 1px solid var(--white);
-    outline: none;
-}
-
-.inputBox label {
-    color: var(--white);
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 17px;
-    pointer-events: none;
-    -webkit-transition: 0.2s ease-in;
-    -moz-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in;
-}
-
-.inputBox input:focus~label,
-.inputBox input:valid~label {
-    top: -30px;
-    left: 0;
-    color: var(--white);
-    font-size: 16px;
-    font-style: italic;
-}
 .checkbox {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 20px 0px;
 }
 .checkbox input {
     display: inline-block;
@@ -90,4 +52,37 @@ h3 {
     width: 40%;
     padding: 2% 3%;
     background-color: var(--white);
+    color: var(--berge);
+}
+.resume h4{
+    font-size: 1.5em;
+    margin: 0px;
+}
+.resume-block {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 2% 0px;
+    font-size: 1.2em;
+}
+hr {
+    display: block;
+    border: 0.1px solid var(--berge);
+}
+.alert {
+    padding: 2%;
+    background-color: var(--pink);
+    border: 1px solid var(--pink);
+    border-radius: 5px;
+    font-size: 1.1em;
+    color: var(--red);
+}
+.alert h6 {
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.alert hr {
+    border: 1px solid var(--red);
 }

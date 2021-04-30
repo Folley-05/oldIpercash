@@ -5,10 +5,11 @@
     --red: #dd1a14;
     --near-black: #424242;
     --black: #000;
-    --pink: rgba(255,219,211, 0.3);
+    --pink: #f8d7da;
     --other-red: #dc3545;
     --transparent-gray: rgb(149,143,143, 0.7);
     --blue: #007bff;
+    --berge: #929eaa;
 }
 
 html {
