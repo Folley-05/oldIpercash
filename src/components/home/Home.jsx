@@ -1,11 +1,11 @@
 import React from 'react'
 
-import './main.css'
+import './home.css'
 import First from './First'
 import Second from './Second'
 import Third from './Third'
 
-function Main() {
+function Home() {
     return (
         <div className="main">
             <First />
@@ -15,4 +15,4 @@ function Main() {
     )
 }
 
-export default Main
+export default Home
