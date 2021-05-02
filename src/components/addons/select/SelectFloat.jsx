@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import './inputfloat.css'
+import './selectfloat.css'
 
-function InputFloat({label, placeholder, theme}) {
+function SelectFloat({label}) {
 	const [isActive, setIsActive] = useState(false)
 	const [value, setValue] = useState('')
 	let place=false
@@ -19,15 +19,18 @@ function InputFloat({label, placeholder, theme}) {
 		}
   	}
 
-	return (
-		<div className={`float-label ${theme}`}>
-			<input type="text" value={value} onChange={e=>handleChange(e.target.value)} placeholder={isActive && place ? placeholder : ''} />
+    return (
+		<div id="float-select">
+            <select name="" id="payment" onChange={e=>handleChange(e.target.value)}>
+                <option value="" style={{height: 1}}></option>
+                <option value="mobile">Mobile</option>
+            </select>
 
 			<label htmlFor="email" className={isActive ? 'active' : ''}>
 				{label}
 			</label>
 		</div>
-	)
+    )
 }
 
-export default InputFloat
+export default SelectFloat
