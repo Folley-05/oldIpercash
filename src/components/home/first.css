@@ -63,29 +63,30 @@
     }
     .banner-container{
         display: flex;
+        width: 95%;
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
         margin: 0px auto;
     }
     .text-banner {
-        width: 50%;
-        margin-right: 20px;
-        font-size: 2.3em;
+        margin-right: 5px;
+        font-size: 1.5em;
     }
     .card {
         background-color: var(--transparent-gray);
-        width: 28%;
+        width: 60%;
+        min-width: 350px;
     }
     .card-header {
         display: block;
-        padding: 2%;
+        padding: 2px;
         font-size: 1.3em;
         text-align: center;
         border-bottom: 1px solid var(--gray);
     }
     .card-body {
-        width: 80%;
+        width: 90%;
         margin: 50px auto;
     }
     .label-card {
@@ -95,13 +96,48 @@
     .input-card {
         display: block;
         width: 100%;
+        margin-bottom: 30px;
+        outline: 0px;
         background-color: transparent;
-        font-size: 2em;
+        font-size: 1.5em;
         border: none;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid var(--white);
     }
-    .input-card:focus {
-        border: none;
+    .card-button {
+        width: 100%;
+        padding: 12px;
+        margin: 5px auto;
+        font-weight: normal;
+    }
+    .body-footer {
+        display: flex;
+        width: 100%;
+        font-family: row nowrap;
+        justify-content: space-between;
+    }
+    .body-footer button {
+        width: 48%;
+        /* margin-right: 10px; */
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .text-banner {
+        width: 40%;
+        margin-right: 20px;
+        font-size: 2em;
+    }
+    .card {
+        background-color: var(--transparent-gray);
+        width: 40%;
+        max-width: 450px;
+    }
+    .card-header {
+        display: block;
+        padding: 2%;
+        font-size: 1.3em;
+        text-align: center;
+        border-bottom: 1px solid var(--gray);
     }
     .card-button {
         width: 100%;
@@ -112,7 +148,26 @@
         font-family: row nowrap;
         justify-content: space-between;
     }
-    .body-footer button {
-        margin-right: 10px;
+    
+}
+
+@media screen and (min-width: 1200px) {
+    .banner-container{
+        display: flex;
+        width: 90%;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0px auto;
     }
+    .text-banner {
+        margin-right: 5px;
+        width: 50%;
+        font-size: 2.3em;
+    }
+    .card-body {
+        width: 80%;
+        margin: 50px auto;
+    }
+    
 }
