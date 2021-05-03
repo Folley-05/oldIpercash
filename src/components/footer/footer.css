@@ -1,5 +1,5 @@
 .footer {
-    margin-top: 50px;
+    margin-top: 10px;
 }
 .footer a {
     color: var(--blue);
@@ -16,7 +16,7 @@ hr {
     color: var(--other-red);
 }
 .logo-footer {
-    width: 50%;
+    width: 30%;
     margin: auto;
 }
 .logo-footer img {
@@ -46,7 +46,12 @@ hr {
         display: none;
     }
     .logo {
+        display: flex;
+        justify-content: center;
         width: 25%;
+    }
+    .logo-footer {
+        width: 200px;
     }
     .link {
         width: 25%;

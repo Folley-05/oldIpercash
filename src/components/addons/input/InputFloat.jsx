@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 
 import './inputfloat.css'
 
-function InputFloat({label, placeholder, theme}) {
+function InputFloat({label, placeholder, name, required, theme, change}) {
 	const [isActive, setIsActive] = useState(false)
 	const [value, setValue] = useState('')
 	let place=false
 
-  	const handleChange=text=>{
-		setValue(text)
-		if (text !== '') {
+  	const handleChange=e=>{
+		setValue(e.value)
+		if(change) change(e)
+		if (e.value !== '') {
 			setIsActive(true)
 				place=true
 			} 
@@ -21,7 +22,12 @@ function InputFloat({label, placeholder, theme}) {
 
 	return (
 		<div className={`float-label ${theme}`}>
-			<input type="text" value={value} onChange={e=>handleChange(e.target.value)} placeholder={isActive && place ? placeholder : ''} />
+			<input type="text" value={value}
+				name={name} 
+				onChange={e=>handleChange(e.target)} 
+				placeholder={isActive && place ? placeholder : ''} 
+				required={required}
+			/>
 
 			<label htmlFor="email" className={isActive ? 'active' : ''}>
 				{label}

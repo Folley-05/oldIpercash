@@ -1,17 +1,20 @@
 .second-descript {
 	width: 90%;
 	margin: auto;
+	padding: 3%;
 }
 .service-description {
+	display: block;
+	width: 80%;
 	margin: 10px auto;
 	text-align: center;
-	font-size: 1.4em;
+	font-size: 1.5em;
 }
 .account-service {
 	display: block;
 }
 .mtn-orange {
-	width: 95%;
+	width: 75%;
 	margin: auto;
 }
 .img-center {
@@ -19,15 +22,27 @@
 	width: 100%;
 }
 
-
 @media screen and (min-width: 768px) {
 	.account-service {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		width: 70%;
+		width: 90%;
 		margin: auto;
 		margin: 20px auto;
+	}
+	.service-description {
+		font-size: 1.8em;
+	}
+	.mtn-orange {
+		width: 90%;
+	}
+	
+}
+
+@media screen and (min-width: 992px) {
+	.account-service {
+		width: 80%;
 	}
 	.second-descript {
 		width: 80%;
@@ -40,7 +55,7 @@
 		font-size: 2.2em;
 		font-weight: 400;
 	}
-	.mtn-orange-short {
+	.mtn-orange {
 	}
 	.img-center {
 		display: block;

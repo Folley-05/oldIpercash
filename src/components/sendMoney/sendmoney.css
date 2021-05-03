@@ -1,12 +1,9 @@
 .send-money {
     padding: 3%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: stretch;
 }
 .receiver-info {
-    width: 40%;
+    width: 90%;
+    margin: 20px auto;
     padding: 2% 3%;
     background-color: var(--near-black);
     color: var(--white);
@@ -49,7 +46,8 @@ h3 {
 }
 
 .resume {
-    width: 40%;
+    width: 90%;
+    margin: 20px auto;
     padding: 2% 3%;
     background-color: var(--white);
     color: var(--berge);
@@ -66,16 +64,15 @@ h3 {
     font-size: 1.2em;
 }
 hr {
-    display: block;
-    border: 0.1px solid var(--berge);
+    border: 1px solid var(--berge);
 }
 .alert {
     padding: 2%;
-    background-color: var(--pink);
-    border: 1px solid var(--pink);
-    border-radius: 5px;
+    background-color: var(--second-pink);
     font-size: 1.1em;
     color: var(--red);
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
 }
 .alert h6 {
     padding: 0px;
@@ -84,5 +81,30 @@ hr {
     font-weight: 500;
 }
 .alert hr {
-    border: 1px solid var(--red);
+    border: 1px solid #f1b0b7;
+}
+
+@media screen and (min-width: 768px) {
+    .send-money {
+        padding: 3%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+    .receiver-info {
+        width: 40%;
+        padding: 2% 3%;
+    }
+    hr {
+        display: block !important;
+    }
+    .resume {
+        width: 40%;
+        margin-top: 15px;
+        padding: 2% 3%;
+    }
+    .resume-block {
+        padding: 3% 0px;
+    }
 }

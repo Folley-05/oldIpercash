@@ -1,3 +1,6 @@
+.text-title {
+	text-align: center;
+}
 .desktop-step, .tablet-step {
 	display: none;
 }

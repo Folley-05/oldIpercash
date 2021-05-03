@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 
 import './selectfloat.css'
 
-function SelectFloat({label}) {
+function SelectFloat({label, name, change, option}) {
 	const [isActive, setIsActive] = useState(false)
 	const [value, setValue] = useState('')
 	let place=false
 
-  	const handleChange=text=>{
-		setValue(text)
-		if (text !== '') {
+  	const handleChange=e=>{
+		setValue(e.value)
+		if(change) change(e)
+		if (e.value !== '') {
 			setIsActive(true)
 				place=true
 			} 
@@ -21,9 +22,9 @@ function SelectFloat({label}) {
 
     return (
 		<div id="float-select">
-            <select name="" id="payment" onChange={e=>handleChange(e.target.value)}>
+            <select name={name} id="payment" onChange={e=>handleChange(e.target)}>
                 <option value="" style={{height: 1}}></option>
-                <option value="mobile">Mobile</option>
+				{ option.map((opt, i)=><option key={`opt${i}`} value={opt.value} >{opt.label}</option>) }
             </select>
 
 			<label htmlFor="email" className={isActive ? 'active' : ''}>

@@ -26,6 +26,7 @@ header {
         flex-flow: row nowrap;
         justify-content: space-between;
         align-items: center;
+        padding: 1%;
         background-color: var(--gray);
         /* border: 1px solid #000; */
     }
@@ -57,5 +58,11 @@ header {
     .nav-item:hover {
         cursor: pointer;
         background-color: var(--red);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    header {
+        padding: 0px;
     }
 }
