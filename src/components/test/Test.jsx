@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import './test.css'
+import InputFloat from '../addons/input/InputFloat'
 
 function Test() {
   const [isActive, setIsActive] = useState(false)
@@ -17,13 +18,9 @@ function Test() {
   }
 
   return (
-    <div id="float-label">
-      <input type="email" value={value} onChange={e=>handleChange(e.target.value)} />
-
-      <label htmlFor="email" className={isActive ? 'active' : ''}>
-        E-mail
-      </label>
-  </div>
+	  <div className="test">
+		  <InputFloat label="champs test" theme="dark" />
+	  </div>
   )
 }
 
