@@ -27,7 +27,7 @@ function SendMoney() {
             <div className="receiver-info">
                 <div className="form-container">
                     <div className="amount">
-                        <InputFloat label="amount*" required={true} name="amount" change={handleChange} />
+                        <InputFloat label="amount*" theme="dark" required={true} name="amount" change={handleChange} />
                     </div>
                     <div className="change">
                         <h2>1.00€==656 XAF</h2>
@@ -35,13 +35,13 @@ function SendMoney() {
                         <h3>receiver's infomations</h3>
                     <div className="form">
                         <div className="inputBox">
-                            <InputFloat label="Full Name*" required={true} name="name"  change={handleChange} placeholder="Ex: John" />
+                            <InputFloat label="Full Name*" theme="dark" required={true} name="name"  change={handleChange} placeholder="Ex: John" />
                         </div>
                         <div className="inputBox">
-                            <InputFloat label="Phone Number*" required={true} name="phone" change={handleChange} placeholder="Ex: 629384939" />
+                            <InputFloat label="Phone Number*" theme="dark" required={true} name="phone" change={handleChange} placeholder="Ex: 629384939" />
                         </div>
                         <div className="inputBox">
-                            <InputFloat label="Confirm Phone Number*" required={true} name="cPhone" change={handleChange} placeholder="it shoul match with phone number" />
+                            <InputFloat label="Confirm Phone Number*" theme="dark" required={true} name="cPhone" change={handleChange} placeholder="it shoul match with phone number" />
                         </div>
                         <div className="checkbox">
                             <input type="checkbox" id="save"/>

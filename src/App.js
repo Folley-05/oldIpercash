@@ -7,7 +7,7 @@ import Test from './components/test/Test'
 function App() {
 	return (
 		<div className="">
-			{/* <AppRoot /> */}
+			<AppRoot />
 			<Test />
 		</div>
 	)

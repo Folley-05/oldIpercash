@@ -10,10 +10,10 @@ function LogIn() {
             <hr/>
             <div className="login-form">
                 <div className="">
-                    <InputFloat label="Email" />
+                    <InputFloat label="Email" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Password" />
+                    <InputFloat label="Password" theme="dark" />
                 </div>
                 <div className="">
                     <button>Connexion</button>

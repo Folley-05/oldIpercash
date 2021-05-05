@@ -10,28 +10,28 @@ function SignUp() {
             <hr/>
             <div className="signup-form">
                 <div className="">
-                    <InputFloat label="Email *" />
+                    <InputFloat label="Email *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Pseudo *" />
+                    <InputFloat label="Pseudo *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Password *" />
+                    <InputFloat label="Password *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Confirm Password *" />
+                    <InputFloat label="Confirm Password *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Last Name *" />
+                    <InputFloat label="Last Name *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="First Name *" />
+                    <InputFloat label="First Name *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Country *" />
+                    <InputFloat label="Country *" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="City *" />
+                    <InputFloat label="City *" theme="dark" />
                 </div>
                 <div className="">
                     <input type="checkbox" name="" id="checkbox"/>
