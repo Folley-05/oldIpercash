@@ -6,7 +6,7 @@ import SignUp from './SignUp'
 import useModal from '../modal/useModal'
 import Modal from '../modal/Modal'
 
-import enseigne from './assets/logo-ipercash.jpeg'
+import enseigne from './assets/logo-ipercash.png'
 
 function Header() {
     const {isShowing, toogle}=useModal()
