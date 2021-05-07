@@ -55,16 +55,16 @@ function SellCrypto() {
                         <div className="icon"> {selectIcon()} </div>
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Montant" name="amount" change={handleChange} />
+                        <InputFloat label="Montant" theme="ligth" name="amount" change={handleChange} />
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Adresse Wallet" name="wallet" change={handleChange} />
+                        <InputFloat label="Adresse Wallet" theme="ligth" name="wallet" change={handleChange} />
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Numero Du Compte" name="numAccount" change={handleChange} />
+                        <InputFloat label="Numero Du Compte" theme="ligth" name="numAccount" change={handleChange} />
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Nom Du Compte" name="nameAccount" change={handleChange} />
+                        <InputFloat label="Nom Du Compte" theme="ligth" name="nameAccount" change={handleChange} />
                     </div>
                     <div className="buttonBox">
                         <button disabled={active()} onClick={sell}>Sell</button>

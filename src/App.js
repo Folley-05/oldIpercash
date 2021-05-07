@@ -2,13 +2,16 @@ import React from 'react'
 
 import './App.css'
 import AppRoot from './AppRoot'
-import Test from './components/test/Test'
+import Ramp from './components/ramp/Ramp'
+//import Test from './components/test/Test'
 
 function App() {
 	return (
 		<div className="">
 			<AppRoot />
-			<Test />
+			{/* <Test /> */}
+			<Ramp />
+
 		</div>
 	)
 }
