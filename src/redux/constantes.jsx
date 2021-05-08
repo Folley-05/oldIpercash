@@ -1,0 +1,3 @@
+const SET_AMOUNT='SET_AMOUNT'
+
+export {SET_AMOUNT}

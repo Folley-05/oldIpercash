@@ -1,14 +1,21 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import "./first.css"
 import InputFloat from '../addons/input/InputFloat'
+import { setAmount } from '../../redux/actions'
 
-import image1 from './assets/family.jpg'
-
-function First() {
+function First({dispatch}) {
     let history=useHistory()
-    console.log(history);
+    const submit=e=>{
+        e.preventDefault()
+        console.log("hello")
+        dispatch(setAmount())
+        history.push('/sendmoney')
+        return false
+    }
+    console.log("les props",dispatch);
     return (
         <div className="banner">
             <div className="banner-container">
@@ -21,10 +28,12 @@ function First() {
                     </div>
                     <div className="card-body">
                         <div className="form">
-                            <div className="label-card">
-                                <InputFloat label="amount" theme="dark" />
-                            </div>
-                            <button className="card-button" onClick={()=>history.push('/sendmoney')}>Credit Mobile Account</button>
+                            <form action="" onSubmit={submit}>
+                                <div className="label-card">
+                                    <InputFloat label="amount" theme="dark" />
+                                </div>
+                                <button type="submit" className="card-button" >Credit Mobile Account</button>
+                            </form>
                         </div>
                         <div className="body-footer">
                             <button className="card-button" onClick={()=>history.push('/sellcrypto')}>Sell Crypto</button>
@@ -37,4 +46,6 @@ function First() {
     )
 }
 
-export default First
+
+const mapStateToProps=state=>({amount: state.amountReducer.amount})
+export default connect(mapStateToProps)(First)

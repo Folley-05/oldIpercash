@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { act } from 'react-dom/test-utils'
-import InputFloat from '../addons/input/InputFloat'
+import { connect } from 'react-redux'
+import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 
 import './sendmoney.css'
+import InputFloat from '../addons/input/InputFloat'
 
-function SendMoney() {
+function SendMoney({amount}) {
     const [state, setState] = useState({
-        amount: 0, name: "", phone: "", cPhone: ""
+        montant: amount, name: "", phone: "", cPhone: ""
     })
     const handleChange=e=>{
         console.log(e.name);
@@ -15,19 +16,30 @@ function SendMoney() {
         setState({...state})
     }
     const send=()=>{
-        console.log("you can send money");
+        ramp()
     }
     const active=()=>{
-        if(state.amount > 10 && state.name && state.phone) return false
+        if(state.montant > 10 && state.name && state.phone) return false
         else return true
     }
-    console.log(state);
+    const ramp=()=>{
+        let api=new RampInstantSDK({
+            hostAppName : 'Ipercash' , 
+            hostLogoUrl : 'https://ipercash.fr/assets/logo-ipercash.jpeg',
+            swapAsset: 'BCH',
+            fiatCurrency: 'EUR',
+            fiatValue: 15,
+            userAddress: 'qpv6j55d02e0dyh2x08t0vgrpurkkjzupqhxzlzxsq',
+        })
+        api.show()
+    }
+    console.log(amount);
     return (
         <div className="send-money">
             <div className="receiver-info">
                 <div className="form-container">
                     <div className="amount">
-                        <InputFloat label="amount*" theme="dark" required={true} name="amount" change={handleChange} />
+                        <InputFloat label="amount*" val={state.montant} theme="dark" required={true} name="montant" change={handleChange} />
                     </div>
                     <div className="change">
                         <h2>1.00€==656 XAF</h2>
@@ -57,19 +69,19 @@ function SendMoney() {
                 <h4 className="resume-title">Transaction Summary</h4><hr/>
                 <div class="resume-block">
                     <div class="">Transfer Amount</div>
-                    <div class="">{ state.amount } EUR</div>
+                    <div class="">{ state.montant } EUR</div>
                 </div><hr/>
                 <div class="resume-block">
                     <div class="">Fees</div>
-                    <div class="">{ state.amount*0.1 } EUR</div>
+                    <div class="">{ state.montant*0.1 } EUR</div>
                 </div><hr/>
                 <div class="resume-block">
                     <div class="">Total Amount</div>
-                    <div class="">{ state.amount*1.1 } EUR</div>
+                    <div class="">{ state.montant*1.1 } EUR</div>
                 </div><hr/>
                 <div class="resume-block">
                     <div class="">Mobile Mobile Account will receive</div>
-                    <div class=""> { 656*state.amount } XAF</div>
+                    <div class=""> { 656*state.montant } XAF</div>
                 </div>
                 <div class="alert" role="alert">
                     <h6 class="alert-heading">Warning!</h6>
@@ -81,5 +93,7 @@ function SendMoney() {
     )
 }
 
-export default SendMoney
+
+const mapStateToProps=state=>({amount: state.amountReducer.amount})
+export default connect(mapStateToProps)(SendMoney)
 
