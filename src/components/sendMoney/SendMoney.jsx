@@ -28,13 +28,16 @@ function SendMoney({amount}) {
             hostLogoUrl : 'https://ipercash.fr/assets/logo-ipercash.jpeg',
             swapAsset: 'BCH',
             fiatCurrency: 'EUR',
-            fiatValue: 15,
+            fiatValue: state.amount,
             userAddress: 'qpv6j55d02e0dyh2x08t0vgrpurkkjzupqhxzlzxsq',
+            //variant: 'embedded-desktop',
+            containerNode: document.getElementById('ramp')
         })
         api.show()
     }
     console.log(amount);
     return (
+        <>
         <div className="send-money">
             <div className="receiver-info">
                 <div className="form-container">
@@ -90,6 +93,10 @@ function SendMoney({amount}) {
                 </div>
             </div>
         </div>
+        {/* <div id="ramp">
+
+        </div> */}
+        </>
     )
 }
 
