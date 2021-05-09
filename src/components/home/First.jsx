@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,15 +7,21 @@ import InputFloat from '../addons/input/InputFloat'
 import { setAmount } from '../../redux/actions'
 
 function First({dispatch}) {
+    const [montant, setMontant] = useState('')
     let history=useHistory()
     const submit=e=>{
         e.preventDefault()
         console.log("hello")
-        dispatch(setAmount())
+        dispatch(setAmount(montant))
         history.push('/sendmoney')
         return false
     }
-    console.log("les props",dispatch);
+    const handleChange=e=>{
+        console.log(e.name);
+        setMontant(e.value)
+    }
+    //console.log("les props",dispatch);
+    console.log(montant);
     return (
         <div className="banner">
             <div className="banner-container">
@@ -30,7 +36,7 @@ function First({dispatch}) {
                         <div className="form">
                             <form action="" onSubmit={submit}>
                                 <div className="label-card">
-                                    <InputFloat label="amount" theme="dark" />
+                                    <InputFloat label="amount" name="amount" theme="dark" change={handleChange} />
                                 </div>
                                 <button type="submit" className="card-button" >Credit Mobile Account</button>
                             </form>
