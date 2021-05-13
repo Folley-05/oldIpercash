@@ -25,7 +25,7 @@ function SendMoney({amount}) {
     const ramp=()=>{
         let api=new RampInstantSDK({
             hostAppName : 'Ipercash' , 
-            hostLogoUrl : 'https://ipercash.fr/assets/logo-ipercash.jpeg',
+            hostLogoUrl : 'https://ramp.ipercash.fr/static/media/logo-ipercash.7177814f.png',
             swapAsset: 'BCH',
             fiatCurrency: 'EUR',
             fiatValue: state.amount,

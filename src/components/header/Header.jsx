@@ -27,10 +27,10 @@ function Header() {
             </div>
             <nav className="navbar">
                 <ul className="navigation">
-                    <li className="nav-item">Home</li>
+                    <li className="nav-item">Help</li>
                     <li className="nav-item" onClick={()=>showBlock(2)}>Sign Up</li>
                     <li className="nav-item" onClick={()=>showBlock(1)}>Log In</li>
-                    <li className="nav-item">Help</li>
+                    <li className="nav-item">Home</li>
                 </ul>
             </nav>
             <Modal isShowing={isShowing} hide={toogle}>
