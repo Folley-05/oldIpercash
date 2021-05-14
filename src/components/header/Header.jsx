@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { FaCaretDown } from 'react-icons/fa'
 
 import './header.css'
 import LogIn from './LogIn'
@@ -30,6 +31,16 @@ function Header() {
                     <li className="nav-item">Help</li>
                     <li className="nav-item" onClick={()=>showBlock(2)}>Sign Up</li>
                     <li className="nav-item" onClick={()=>showBlock(1)}>Log In</li>
+                    <li className="nav-item dropdown">
+                        <div className="dropbtn">Services <FaCaretDown /></div>
+                        <div className="dropdown-content">
+                            <li className="service-item">Send Money</li>
+                            <span className="line"/>
+                            <li className="service-item">Buy Crypto</li>
+                            <span className="line"/>
+                            <li className="service-item">Sell Crypto</li>
+                        </div>
+                    </li>
                     <li className="nav-item">Home</li>
                 </ul>
             </nav>

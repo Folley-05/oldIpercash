@@ -6,7 +6,7 @@ header {
 }
 .image-enseigne {
     display: block;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
@@ -19,6 +19,36 @@ header {
     border-bottom: 1.5px solid var(--red);
     color: var(--red);
 }
+
+ /* start dropdown style  */
+ .dropdown {
+    position: relative;
+    /* display: inline-block; */
+}
+.dropdown-content {
+    display: block;
+    width: 95%;
+    margin-left: 5%;
+    background-color: transparent;
+    text-align: left;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content li:hover {
+    background-color: var(--transparent-gray);
+}
+.service-item {
+    padding: 12px;
+    border-bottom: 1.5px solid var(--red);
+    color: var(--red);
+}
+.dropbtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 @media screen and (min-width: 768px) {
     header {
@@ -38,19 +68,21 @@ header {
         width: 20%;
     }
     .navbar {
-        width: 60%;
+        width: 80%;
         /* border: 2px solid #000; */
     }
     .navigation {
         width: 100%;
         display: flex;
         flex-flow: row-reverse nowrap;
+        align-items: center;
+        margin-top: 0px;
         /* border: 2px solid #000; */
     }
     .nav-item {
         margin-right: 2%;
         padding: 10px 20px;
-        font-size: 1.3em;
+        font-size: 1.2em;
         color: black;
         border: 2px solid var(--red); 
         border-radius: 20px;
@@ -58,6 +90,42 @@ header {
     .nav-item:hover {
         cursor: pointer;
         background-color: var(--red);
+    }
+
+    /* start dropdown style  */
+    .dropdown {
+        position: relative;
+        /* display: inline-block; */
+    }
+    .dropdown-content {
+        display: none;
+        width: 103%;
+        margin: 0%;
+        position: absolute;
+        left: -1.5%;
+        top: 100%;
+        background-color: var(--red);
+        /* min-width: 200px; */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown:hover {
+        border-radius: 0px;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown-content li:hover {
+        background-color: var(--transparent-gray);
+    }
+    .service-item {
+        padding: 15px 0px;
+        text-align: center;
+        color: var(--black);
+    }
+    .line {
+        display: block;
+        border-bottom: 1px solid var(--gray);
     }
 }
 
