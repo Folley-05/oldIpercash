@@ -12,6 +12,7 @@ import enseigne from './assets/logo-ipercash.png'
 function Header() {
     const {isShowing, toogle}=useModal()
     const [block, setBlock] = useState(1)
+    const [dropdown, setDropdown] = useState(false)
     const showBlock=i=>{
         setBlock(i)
         toogle()
@@ -32,13 +33,25 @@ function Header() {
                     <li className="nav-item" onClick={()=>showBlock(2)}>Sign Up</li>
                     <li className="nav-item" onClick={()=>showBlock(1)}>Log In</li>
                     <li className="nav-item dropdown">
-                        <div className="dropbtn">Services <FaCaretDown /></div>
-                        <div className="dropdown-content">
-                            <li className="service-item">Send Money</li>
-                            <span className="line"/>
-                            <li className="service-item">Buy Crypto</li>
-                            <span className="line"/>
-                            <li className="service-item">Sell Crypto</li>
+                        <div className="services-desktop">
+                            <div className="dropbtn">Services <FaCaretDown /></div>
+                            <div className="dropdown-content">
+                                <li className="service-item">Send Money</li>
+                                <span className="line"/>
+                                <li className="service-item">Buy Crypto</li>
+                                <span className="line"/>
+                                <li className="service-item">Sell Crypto</li>
+                            </div>
+                        </div>
+                        <div className="services-mobile">
+                            <div className="dropbtn" onClick={()=>setDropdown(!dropdown)}>Services <FaCaretDown /></div>
+                            {dropdown && <div className="dropdown-content">
+                                <li className="service-item">Send Money</li>
+                                <span className="line"/>
+                                <li className="service-item">Buy Crypto</li>
+                                <span className="line"/>
+                                <li className="service-item">Sell Crypto</li>
+                            </div>}
                         </div>
                     </li>
                     <li className="nav-item">Home</li>
