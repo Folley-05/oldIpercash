@@ -9,10 +9,10 @@ import Test from './components/test/Test'
 function AppRoot() {
     return (
 		<div className="container">
-			<Header />
+			{/* <Header /> */}
 			<Navigator />
 			{/* <Test /> */}
-			<Footer />
+			{/* <Footer /> */}
 		</div>
     )
 }

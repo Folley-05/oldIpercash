@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaCaretDown } from 'react-icons/fa'
+import { Link, useHistory } from 'react-router-dom'
 
 import './header.css'
 import LogIn from './LogIn'
@@ -13,6 +14,8 @@ function Header() {
     const {isShowing, toogle}=useModal()
     const [block, setBlock] = useState(1)
     const [dropdown, setDropdown] = useState(false)
+    let history=useHistory()
+    console.log(history)
     const showBlock=i=>{
         setBlock(i)
         toogle()
@@ -36,21 +39,21 @@ function Header() {
                         <div className="services-desktop">
                             <div className="dropbtn">Services <FaCaretDown /></div>
                             <div className="dropdown-content">
-                                <li className="service-item">Send Money</li>
+                                <li className="service-item"><Link>Send Money</Link></li>
                                 <span className="line"/>
-                                <li className="service-item">Buy Crypto</li>
+                                <li className="service-item"><Link>Buy Crypto</Link></li>
                                 <span className="line"/>
-                                <li className="service-item">Sell Crypto</li>
+                                <li className="service-item"><Link>Sell Crypto</Link></li>
                             </div>
                         </div>
                         <div className="services-mobile">
                             <div className="dropbtn" onClick={()=>setDropdown(!dropdown)}>Services <FaCaretDown /></div>
                             {dropdown && <div className="dropdown-content">
-                                <li className="service-item">Send Money</li>
+                                <li className="service-item"><Link>Send Money</Link></li>
                                 <span className="line"/>
-                                <li className="service-item">Buy Crypto</li>
+                                <li className="service-item"><Link>Buy Crypto</Link></li>
                                 <span className="line"/>
-                                <li className="service-item">Sell Crypto</li>
+                                <li className="service-item"><Link>Sell Crypto</Link></li>
                             </div>}
                         </div>
                     </li>
