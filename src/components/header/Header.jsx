@@ -39,21 +39,21 @@ function Header() {
                         <div className="services-desktop">
                             <div className="dropbtn">Services <FaCaretDown /></div>
                             <div className="dropdown-content">
-                                <li className="service-item"><Link>Send Money</Link></li>
+                                <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
                                 <span className="line"/>
-                                <li className="service-item"><Link>Buy Crypto</Link></li>
+                                <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
                                 <span className="line"/>
-                                <li className="service-item"><Link>Sell Crypto</Link></li>
+                                <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
                             </div>
                         </div>
                         <div className="services-mobile">
                             <div className="dropbtn" onClick={()=>setDropdown(!dropdown)}>Services <FaCaretDown /></div>
                             {dropdown && <div className="dropdown-content">
-                                <li className="service-item"><Link>Send Money</Link></li>
+                                <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
                                 <span className="line"/>
-                                <li className="service-item"><Link>Buy Crypto</Link></li>
+                                <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
                                 <span className="line"/>
-                                <li className="service-item"><Link>Sell Crypto</Link></li>
+                                <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
                             </div>}
                         </div>
                     </li>
