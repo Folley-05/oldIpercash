@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaCaretDown } from 'react-icons/fa'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import './header.css'
 import LogIn from './LogIn'
@@ -8,14 +8,12 @@ import SignUp from './SignUp'
 import useModal from '../modal/useModal'
 import Modal from '../modal/Modal'
 
+import MobileNavigation from './MobileNavigation'
 import enseigne from './assets/logo-ipercash.png'
 
 function Header() {
     const {isShowing, toogle}=useModal()
     const [block, setBlock] = useState(1)
-    const [dropdown, setDropdown] = useState(false)
-    let history=useHistory()
-    console.log(history)
     const showBlock=i=>{
         setBlock(i)
         toogle()
@@ -47,14 +45,8 @@ function Header() {
                             </div>
                         </div>
                         <div className="services-mobile">
-                            <div className="dropbtn" onClick={()=>setDropdown(!dropdown)}>Services <FaCaretDown /></div>
-                            {dropdown && <div className="dropdown-content">
-                                <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
-                                <span className="line"/>
-                                <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
-                                <span className="line"/>
-                                <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
-                            </div>}
+                            {/* <div className="dropbtn" onClick={()=>setDropdown(!dropdown)}>Services <FaCaretDown /></div> */}
+                            <MobileNavigation />
                         </div>
                     </li>
                     <li className="nav-item">Home</li>
@@ -68,3 +60,12 @@ function Header() {
 }
 
 export default Header
+
+
+// {dropdown && <div className="dropdown-content">
+//                                 <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
+//                                 <span className="line"/>
+//                                 <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
+//                                 <span className="line"/>
+//                                 <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
+//                             </div>}
