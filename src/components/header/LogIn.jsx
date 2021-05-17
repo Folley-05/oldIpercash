@@ -11,15 +11,23 @@ function LogIn() {
         setState({...state})
     }
     const login=()=>{
-        console.log(state);
-        var raw = "{\n  \"email\": \"test@email.com\",\n  \"password\": \"1234567\"\n}";
-        const requestOption={
+        console.log("login");
+        let data=new FormData()
+        data.append('email', state.email)
+        data.append('password', state.password)
+        let requestOptions = {
             method: 'POST',
-            body: raw,
+            body: data,
             redirect: 'follow'
         }
-        let res=fetch("https://new-ipercash-api.herokuapp.com/api/v1/auth", requestOption).then(response=>response.json()).then(res=>console.log(res))
-        //console.log(res)
+        fetch("https://new-ipercash-api.herokuapp.com/api/v1/auth", requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('errors', error));
+    }
+    const active=()=>{
+        if(state.email && state.password) return false
+        return true
     }
     return (
         <div className="login">
@@ -33,7 +41,7 @@ function LogIn() {
                     <InputFloat label="Password" name="password" theme="dark" change={handleChange} />
                 </div>
                 <div className="">
-                    <button onClick={login}>Connexion</button>
+                    <button disabled={active()} onClick={login}>Connexion</button>
                 </div>
             </div>
         </div>

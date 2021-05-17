@@ -14,7 +14,7 @@ function SignUp() {
         setState({...state})
     }
     const signup=()=>{
-        console.log("go");
+        console.log("signup");
         let data=new FormData()
         data.append('email', state.email)
         data.append('password', state.password)
