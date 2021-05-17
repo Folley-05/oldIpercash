@@ -36,6 +36,7 @@
     .login {
         width: 30vw;
         max-width: none;
-        height: 80vh;
+        height: 50vh;
+        margin-top: 20vh;
     }
 }

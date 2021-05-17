@@ -40,6 +40,8 @@
 @media screen and (min-width: 992px) {
     .signup {
         width: 30vw;
+        min-width: 465px;
+        min-width: 465px;
         max-width: none;
         height: 80vh;
     }
