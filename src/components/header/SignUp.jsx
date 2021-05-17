@@ -1,25 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './signup.css'
 import InputFloat from '../addons/input/InputFloat'
+import { act } from 'react-dom/test-utils'
 
 function SignUp() {
+    const [state, setState] = useState({
+        email: '', password: '', confirmPassword: ''
+    })
+    const handleChange=e=>{
+        let newState=state
+        newState[e.name]=e.value
+        setState({...state})
+    }
+    const signup=()=>{
+        console.log("go");
+        let data=new FormData()
+        data.append('email', state.email)
+        data.append('password', state.password)
+        data.append('password_confirmation', state.confirmPassword)
+        let requestOptions = {
+            method: 'POST',
+            body: data,
+            redirect: 'follow'
+        }
+        fetch("https://new-ipercash-api.herokuapp.com/users", requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('errors', error));
+    }
+    const active=()=>{
+        if((state.email && state.password) && (state.password===state.confirmPassword)) return false
+        return true
+    }
     return (
         <div className="signup">
             <h1>Sign Up</h1>
             <hr/>
             <div className="signup-form">
                 <div className="">
-                    <InputFloat label="Email *" theme="dark" />
+                    <InputFloat label="Email *" name="email" theme="dark" change={handleChange} />
                 </div>
                 <div className="">
-                    <InputFloat label="Pseudo *" theme="dark" />
+                    <InputFloat label="Pseudo *" name="" theme="dark" />
                 </div>
                 <div className="">
-                    <InputFloat label="Password *" theme="dark" />
+                    <InputFloat label="Password *" name="password" theme="dark" change={handleChange} />
                 </div>
                 <div className="">
-                    <InputFloat label="Confirm Password *" theme="dark" />
+                    <InputFloat label="Confirm Password *" name="confirmPassword" theme="dark" change={handleChange} />
                 </div>
                 <div className="">
                     <InputFloat label="Last Name *" theme="dark" />
@@ -38,7 +67,7 @@ function SignUp() {
                     <label htmlFor="checkboc">I accept <a href="">Terms and Condition</a> </label>
                 </div>
                 <div className="">
-                    <button>Save</button>
+                    <button disabled={active()} onClick={signup}>Save</button>
                 </div>
             </div>
         </div>

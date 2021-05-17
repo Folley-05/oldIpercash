@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaChevronCircleRight } from 'react-icons/fa'
 
-import './mobilenavigation.css'
+import './mobileservices.css'
 
 function MobileNavigation() {
     return (
