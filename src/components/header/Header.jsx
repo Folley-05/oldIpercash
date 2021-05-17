@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaCaretDown } from 'react-icons/fa'
+import { FaAngleRight, FaBars } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 import './header.css'
@@ -20,22 +20,21 @@ function Header() {
     }
     return (
         <header>
-            <div className="menu">
-                <div className="control">Z</div>
-            </div>
             <div className="wrapper">
                 <div className="enseigne">
                     <img src={enseigne} alt="" srcset="" className="image-enseigne" />
                 </div>
             </div>
             <nav className="navbar">
+                <input id="group-nav" type="checkbox" hidden />
+                <label className="hamburger" for="group-nav"><span class=""> <FaBars size={25} /> </span></label>
                 <ul className="navigation">
                     <li className="nav-item">Help</li>
                     <li className="nav-item" onClick={()=>showBlock(2)}>Sign Up</li>
                     <li className="nav-item" onClick={()=>showBlock(1)}>Log In</li>
                     <li className="nav-item dropdown">
                         <div className="services-desktop">
-                            <div className="dropbtn">Services <FaCaretDown /></div>
+                            <div className="dropbtn">Services <FaAngleRight /></div>
                             <div className="dropdown-content">
                                 <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
                                 <span className="line"/>
