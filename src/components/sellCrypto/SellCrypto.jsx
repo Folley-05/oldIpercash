@@ -13,7 +13,7 @@ const Icon=[{icon: <FaCcMastercard size={40} />, value: "master"}, {icon: <FaCcV
 
 function SellCrypto() {
     const [state, setState] = useState({
-        crypto: "", payment: "", amount: 0, xaf: 0, eu: 0, rate: 0.015, number: "", confirmNumber: "", wallet: ""
+        crypto: "", operator: "", amount: 0, xaf: 0, eu: 0, rate: 50000, number: "", confirmNumber: "", wallet: ""
     })
 
     const handleChange=e=>{
@@ -30,12 +30,12 @@ function SellCrypto() {
             break
             case "xaf":
                 console.log("c'est le xaf")
-                setState({...state, xaf: e.value, amount:e.value*state.rate/655, eu: e.value/655})
+                setState({...state, xaf: e.value, amount:e.value/state.rate/655, eu: e.value/655})
             break;
             
             case "eu":
                 console.log("c'est le eu")
-                setState({...state, eu: e.value, amount:e.value*state.rate, xaf: e.value*655})
+                setState({...state, eu: e.value, amount:e.value/state.rate, xaf: e.value*655})
             break;
             default:
                 console.log("c;est autre chose")
@@ -46,7 +46,7 @@ function SellCrypto() {
         console.log(" you can sell crypto ")
     }
     const active=()=>{
-        if( false )
+        if( (state.crypto && state.operator && state.amount && state.number && state.wallet) && (state.number===state.confirmNumber) )
             return false
         else return true
     }
@@ -83,14 +83,14 @@ function SellCrypto() {
                         <InputFloat label="Amount In EU" theme="ligth" name="eu" change={amountChange} val={state.eu} />
                     </div>
                     <div className="selectBox">
-                        <div className="select"><SelectFloat label="Mobile Money Operator :" name="operator" theme="ligth" option={paymentOption} /></div>
+                        <div className="select"><SelectFloat label="Mobile Money Operator :" name="operator" change={handleChange} theme="ligth" option={paymentOption} /></div>
                         <div className="icon"> {selectIcon()} </div>
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Mobile Phone Number" theme="ligth" name="number" />
+                        <InputFloat label="Mobile Phone Number" theme="ligth" name="number" change={handleChange} />
                     </div>
                     <div className="inputBox">
-                        <InputFloat label="Confirm Mobile Phone Number" theme="ligth" name="confirmNumber" />
+                        <InputFloat label="Confirm Mobile Phone Number" theme="ligth" name="confirmNumber" change={handleChange} />
                     </div>
                     <div className="inputBox">
                         <InputFloat label="Crypto Wallet Address" theme="ligth" name="wallet" change={handleChange} />

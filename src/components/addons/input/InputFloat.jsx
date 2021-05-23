@@ -10,6 +10,10 @@ function InputFloat({label, placeholder, name, required, theme, change, val}) {
 	useEffect(() => {
 		if(value || value==0) setIsActive(true)
 	}, [])
+	useEffect(() => {
+		setValue(val)
+		// console.log("j'ai change")
+	}, [val])
   	const handleChange=e=>{
 		setValue(e.value)
 		if(change) change(e)
