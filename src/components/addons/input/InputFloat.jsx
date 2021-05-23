@@ -8,7 +8,7 @@ function InputFloat({label, placeholder, name, required, theme, change, val}) {
 	let place=false
 
 	useEffect(() => {
-		if(value) setIsActive(true)
+		if(value || value==0) setIsActive(true)
 	}, [])
   	const handleChange=e=>{
 		setValue(e.value)
