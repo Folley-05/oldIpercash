@@ -37,6 +37,24 @@ function SendMoney({amount}) {
         api.show()
     }
     console.log(amount);
+
+    const testApiWallet=()=>{
+        console.log("debut")
+        requestOption={
+            method: 'POST',
+            body: {
+                password: 'ipercash12',
+                api_code: '',
+                label: 'ipercash folley wallet',
+                email: 'aristotepascaldjounda@gmail.com'
+            },
+            headers: {
+                Accept: 'application/json'
+            }
+        }
+        fetch("http://localhost:3000/api/v2/create")
+    }
+
     return (
         <>
         <div className="send-money">
@@ -94,9 +112,9 @@ function SendMoney({amount}) {
                 </div>
             </div>
         </div>
-        {/* <div id="ramp">
-
-        </div> */}
+        <div className="buttonbox">
+            <button onClick={testApiWallet}>Create Wallet</button>
+        </div>
         </>
     )
 }
