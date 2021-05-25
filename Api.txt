@@ -1,4 +1,11 @@
-coinlayer :
+Ramp
+Production key - 2ee66t5dks34umupdb3sp7eszymyxmhyfwdoqpm2
+Rinkeby staging key - wcc36f3psojgdhm3286fwzqnybrpg3gvbeyhcmcp
+url API: https://api-instant.ramp.network/api
+
+
+
+coinlayer
 cle: 3b58f6abc8877da60261202189c62557
 url API: http://api.coinlayer.com/api/
 exemple: http://api.coinlayer.com/api/live?access_key=3b58f6abc8877da60261202189c62557

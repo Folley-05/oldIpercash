@@ -31,7 +31,8 @@ function SendMoney({amount}) {
             fiatValue: state.amount,
             userAddress: 'qpv6j55d02e0dyh2x08t0vgrpurkkjzupqhxzlzxsq',
             //variant: 'embedded-desktop',
-            containerNode: document.getElementById('ramp')
+            containerNode: document.getElementById('ramp'),
+            hostApiKey: '2ee66t5dks34umupdb3sp7eszymyxmhyfwdoqpm2',
         })
         api.show()
     }

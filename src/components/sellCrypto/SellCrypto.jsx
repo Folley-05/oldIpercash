@@ -8,25 +8,26 @@ import InputFloat from '../addons/input/InputFloat'
 
 
 const cryptoOption=[{label: "BitCoin", value: "bitcoin"}, {label: "Euther", value: "euther"}, {label: "BitCoinCash", value: "bitcoincash"}]
-const paymentOption=[{label: "VisaCard", value: "visa"}, {label: "MasterCard", value: "master"}]
+const paymentOption=[{label: "MTN Mobile Money", value: "visa"}, {label: "Orange Money", value: "master"}]
 const Icon=[{icon: <FaCcMastercard size={40} />, value: "master"}, {icon: <FaCcVisa size={40} />, value: "visa"}]
 const baseUrl="http://api.coinlayer.com/api/live?access_key=3b58f6abc8877da60261202189c62557&symbols=BTC,ETH,BCH&target=EUR"
 
 function SellCrypto() {
     // initialisation des taux de changes
-    const [rate, setRate] = useState({BCH: 7000, BTC: 30000, ETH: 16000})
+    const [rate, setRate] = useState({BCH: 575.69, BTC: 30731.41, ETH: 2075.48})
     // initialisation du state du composants
     const [state, setState] = useState({
         crypto: "BTC", operator: "", amount: 0, xaf: 0, eu: 0, rate: rate.BTC, number: "", confirmNumber: "", wallet: ""
     })
     // on va charcher les bons taux de changes 
     useEffect(() => {
-        fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
-        .then(data=>{
-            setRate(data.rates)
-            setState({...state, rate: data.rates.BTC})
-        })
-        .catch(err=>console.log('err :>> ', err))
+        // fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
+        // .then(data=>{
+        //     setRate(data.rates)
+        //     setState({...state, rate: data.rates.BTC})
+        //     console.log(data.rates)
+        // })
+        // .catch(err=>console.log('err :>> ', err))
     }, [])
 
     // fonction qui gere les changements des input de donnees
