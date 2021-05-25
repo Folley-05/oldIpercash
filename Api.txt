@@ -1,0 +1,4 @@
+coinlayer :
+cle: 3b58f6abc8877da60261202189c62557
+url API: http://api.coinlayer.com/api/
+exemple: http://api.coinlayer.com/api/live?access_key=3b58f6abc8877da60261202189c62557

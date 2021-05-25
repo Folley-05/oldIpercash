@@ -23,6 +23,22 @@ function Test() {
     return false
 
   }
+  const test=()=>{
+    let data=new FormData()
+    //data.append('tel1','123456789')
+    let requestOptions={
+      method: 'POST',
+      body: data,
+      //mode: 'no-cors'
+      // headers: {
+      //   'Accept': 'application/json',
+      // },
+    }
+    fetch("https://risene-api.herokuapp.com/api/updateentreprise/8", requestOptions)
+    .then(response=>response.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.log("erreur", err))
+  }
   return (
     <>
       <h1>Hello Word</h1>
@@ -32,6 +48,8 @@ function Test() {
         <br/>
         <button type="submit">Envoyer</button>
       </form>
+      <br/>
+      <button onClick={test}>test</button>
     </>
   )
 }
