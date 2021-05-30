@@ -24,7 +24,8 @@ function SendMoney({amount}) {
     }
     const ramp=()=>{
         let api=new RampInstantSDK({
-            hostAppName : 'Ipercash' , 
+            url: 'https://ri-widget-staging.firebaseapp.com',
+            hostAppName : 'Ipercash', 
             hostLogoUrl : 'https://ramp.ipercash.fr/static/media/logo-ipercash.7177814f.png',
             swapAsset: 'BCH',
             fiatCurrency: 'EUR',
@@ -32,7 +33,7 @@ function SendMoney({amount}) {
             userAddress: 'qpv6j55d02e0dyh2x08t0vgrpurkkjzupqhxzlzxsq',
             //variant: 'embedded-desktop',
             containerNode: document.getElementById('ramp'),
-            hostApiKey: '2ee66t5dks34umupdb3sp7eszymyxmhyfwdoqpm2',
+            hostApiKey: 'wcc36f3psojgdhm3286fwzqnybrpg3gvbeyhcmcp',
         })
         api.show()
     }
@@ -40,7 +41,7 @@ function SendMoney({amount}) {
 
     const testApiWallet=()=>{
         console.log("debut")
-        requestOption={
+        let requestOption={
             method: 'POST',
             body: {
                 password: 'ipercash12',
@@ -52,7 +53,7 @@ function SendMoney({amount}) {
                 Accept: 'application/json'
             }
         }
-        fetch("http://localhost:3000/api/v2/create")
+        //fetch("http://localhost:3000/api/v2/create")
     }
 
     return (
