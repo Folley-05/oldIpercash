@@ -10,6 +10,8 @@ const cryptoOption=[{label: "BitCoin", value: "bitcoin"}, {label: "Euther", valu
 const paymentOption=[{label: "MTN Mobile Money", value: "visa"}, {label: "Orange Money", value: "master"}]
 const Icon=[{icon: <FaCcMastercard size={40} />, value: "master"}, {icon: <FaCcVisa size={40} />, value: "visa"}]
 const baseUrl="http://api.coinlayer.com/api/live?access_key=3b58f6abc8877da60261202189c62557&symbols=BTC,ETH,BCH&target=EUR"
+// const baseUrl="https://api.smartbit.com.au/v1/exchange-rates"
+// const baseUrl="https://api-instant.ramp.network/api/host-api/assets?currencies=GBP"
 
 function BuyCrypto() {
     // initialisation des taux de changes
@@ -19,14 +21,15 @@ function BuyCrypto() {
         crypto: "BTC", operator: "", amount: 0, xaf: 0, eu: 0, rate: rate.BTC, number: "", confirmNumber: "", wallet: ""
     })
     //on va charcher les bons taux de changes 
-    useEffect(() => {
-        // fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
-        // .then(data=>{
-        //     setRate(data.rates)
-        //     setState({...state, rate: data.rates.BTC})
-        // })
-        // .catch(err=>console.log('err :>> ', err))
-    }, [])
+    // useEffect(() => {
+    //     fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
+    //     .then(data=>{
+    //         console.log("les data ", data)
+    //         //setRate(data.rates)
+    //         //setState({...state, rate: data.rates.BTC})
+    //     })
+    //     .catch(err=>console.log('err :>> ', err))
+    // }, [])
 
     // fonction qui gere les changements des input de donnees
     const handleChange=e=>{

@@ -9,3 +9,15 @@ coinlayer
 cle: 3b58f6abc8877da60261202189c62557
 url API: http://api.coinlayer.com/api/
 exemple: http://api.coinlayer.com/api/live?access_key=3b58f6abc8877da60261202189c62557
+
+
+
+mzXrxNNYrVJgwNL8PGZWTJYbktrhg14kQb
+cTLUtfv2Sq5K1yjs5fcRmxitL51i35WmVxaCGUCbfCp722V5aMVY
+
+my testnet wallet 2N427AhydWeohzvkRGirYj2aCmhB3YQhVU8
+tx: f7f984b02d3a480fb71d45d55dedd5db9a267f909d5f4985f46ed053c6ee5529
+
+my true testnet address : n1kwp1iE588KJsaFxgtRMPUURPUgCywGHR
+privacy key : 9392BBKwZWvarjNUfx9248qinuo3bf9KY38YACxRUiHauBTWGv8
+tx: 897fe3c88335094c55e6626c2e4c8fc3940ce63fef55aa2459ab4eca55c0f5fd

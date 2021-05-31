@@ -35,7 +35,10 @@ function SendMoney({amount}) {
             containerNode: document.getElementById('ramp'),
             hostApiKey: 'wcc36f3psojgdhm3286fwzqnybrpg3gvbeyhcmcp',
         })
-        api.show()
+        api.on('WIDGET_CLOSE', event=>console.log("le widget c'est ferme"))
+        .on('WIDGET_CONFIG_DONE', event=>console.log(event.type))
+        .on('WIDGET_CLOSE_REQUEST_CANCELLED', event=>console.log("vous avez bien fait d'annuler"))
+        .show()
     }
     console.log(amount);
 
