@@ -1,1 +1,9 @@
 ajuster les marges du footer
+
+les points de recherches aujourd'hui :
+
+https://medium.com/@cruzw/crafting-a-blockchain-transaction-with-javascript-3946bda1df7b : "Crafting a Blockchain Transaction with JavaScript | by Cruz | Medium"
+
+https://medium.com/@peterjd42/build-your-own-bitcoin-api-using-node-js-and-bitcoin-core-251e613623db: "Build Your Own Bitcoin API using Node.js and Bitcoin Core | by Peter Durham | Medium"
+
+https://blog.logrocket.com/sending-bitcoin-with-javascript/ : "Envoyez des bitcoins depuis votre portefeuille en utilisant JavaScript - LogRocket Blog"
