@@ -43,20 +43,28 @@ function SendMoney({amount}) {
     console.log(amount);
 
     const testApiWallet=()=>{
-        console.log("debut")
+        console.log("test wallet api")
+        fetch("https://testnet-api.smartbit.com.au/v1/blockchain/address/mozebpMjZjBVqgKAXWHYtgwrNdq4JTeVgA", {method: 'GET'})
+        .then(res=>res.json()).then(data=>console.log(data))
+        .catch(err=>console.log(err))
+    }
+    const sendtest=()=>{
+        console.log("send bitcointest")
+        // let hex='0200000001352ffac305c57d14e3e1570ddba810b47609f5c04c4daf0e99c763c459104f74000000008a47304402202ac5e8498c7bac477952a7fb63fad616841329267bfc658cc10bdcb1f4c7304b02202f401e97f1f73be256fd7f17f2de785dcaeecd205f1ab5c669140e23923622210141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff01d07c2b00000000001976a9145cfde21a42acd074450a247d28aecafad58c95c688ac00000000'
+        // let form=new FormData()
+        // let myHeaders=new Headers()
+        // form.append('hex', hex)
+        let data={ hex: "02000000015b8dd67ebde8367ca95649e154d5c659de09188dc3e1711c4063ef17004eff60000000008a47304402206c07f0fcbbc52aab535db6e4b9ee74d3836679699bfaf1946c733d5eea4f2fb6022003dd5005d106cadb351f3b0495ff6c8d0ccd2e62971db28c704ddcdcf5418f710141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff0108cd2a00000000001976a914de07ef812a082d7c2e1866da69003b38718cdbb288ac00000000" }
         let requestOption={
             method: 'POST',
-            body: {
-                password: 'ipercash12',
-                api_code: '',
-                label: 'ipercash folley wallet',
-                email: 'aristotepascaldjounda@gmail.com'
-            },
+            body: JSON.stringify(data),
             headers: {
                 Accept: 'application/json'
             }
         }
-        //fetch("http://localhost:3000/api/v2/create")
+        fetch("https://testnet-api.smartbit.com.au/v1/blockchain/pushtx", requestOption)
+        .then(res=>res.json()).then(data=>console.log(data))
+        .catch(err=>console.log(err))
     }
 
     return (
@@ -117,7 +125,10 @@ function SendMoney({amount}) {
             </div>
         </div>
         <div className="buttonbox">
-            <button onClick={testApiWallet}>Create Wallet</button>
+            <button onClick={testApiWallet}>Check Wallet</button>
+        </div><br/>
+        <div className="buttonbox">
+            <button onClick={sendtest}>send BitCoinTest</button>
         </div>
         </>
     )

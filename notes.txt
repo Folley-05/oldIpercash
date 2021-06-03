@@ -7,3 +7,7 @@ https://medium.com/@cruzw/crafting-a-blockchain-transaction-with-javascript-3946
 https://medium.com/@peterjd42/build-your-own-bitcoin-api-using-node-js-and-bitcoin-core-251e613623db: "Build Your Own Bitcoin API using Node.js and Bitcoin Core | by Peter Durham | Medium"
 
 https://blog.logrocket.com/sending-bitcoin-with-javascript/ : "Envoyez des bitcoins depuis votre portefeuille en utilisant JavaScript - LogRocket Blog"
+
+dans une transaction entrente, l'adresse des inputs n'est pas l'adresse du wallet
+dans une transaction sortante, l'adresse des inputs est l'adresse du wallet, les champs input_amount et ouput_amount sont differents
+les champs differents : locktime, 
