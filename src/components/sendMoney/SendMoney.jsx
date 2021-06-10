@@ -54,7 +54,7 @@ function SendMoney({amount}) {
         // let form=new FormData()
         // let myHeaders=new Headers()
         // form.append('hex', hex)
-        let data={ hex: "02000000015b8dd67ebde8367ca95649e154d5c659de09188dc3e1711c4063ef17004eff60000000008a47304402206c07f0fcbbc52aab535db6e4b9ee74d3836679699bfaf1946c733d5eea4f2fb6022003dd5005d106cadb351f3b0495ff6c8d0ccd2e62971db28c704ddcdcf5418f710141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff0108cd2a00000000001976a914de07ef812a082d7c2e1866da69003b38718cdbb288ac00000000" }
+        let data={ hex: "0200000001b95e7f8bd3b539aaae9dbcff5a3e54bf7b3cad03d1412c32e9aeffda62ca2999000000008b4830450221008acc7dcb6f30cb1101a3892acdfa424869c0cd9cc7deb9e2c2aeeabbafe672bf02204b9ad28d22c77579edd3711afe773693a5c6642a4c2c38d76d99db380493a08a0141046ec52ee066f639a17ce232013932eca695f3bb8a810d9c17e4841dd18e066811b08cae16eea9010fb94fc18d919dcdbad2600347c279e944cc634eb71b49ac75ffffffff01083900000000000017a914494600efdfe03445c5e34aae5406e0e5811c42948700000000" }
         let requestOption={
             method: 'POST',
             body: JSON.stringify(data),
@@ -62,7 +62,7 @@ function SendMoney({amount}) {
                 Accept: 'application/json'
             }
         }
-        fetch("https://testnet-api.smartbit.com.au/v1/blockchain/pushtx", requestOption)
+        fetch("https://api.smartbit.com.au/v1/blockchain/pushtx", requestOption)
         .then(res=>res.json()).then(data=>console.log(data))
         .catch(err=>console.log(err))
     }

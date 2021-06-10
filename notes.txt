@@ -11,3 +11,10 @@ https://blog.logrocket.com/sending-bitcoin-with-javascript/ : "Envoyez des bitco
 dans une transaction entrente, l'adresse des inputs n'est pas l'adresse du wallet
 dans une transaction sortante, l'adresse des inputs est l'adresse du wallet, les champs input_amount et ouput_amount sont differents
 les champs differents : locktime, 
+
+demander la carte de test au support de ramp
+
+suivre ce lien pour savoir comment gerer les utxo  https://bitcoin.stackexchange.com/questions/32145/what-are-the-trade-offs-between-the-different-algorithms-for-deciding-which-utxo
+
+lien pour avoir la liste des utxo (0as sure que ca marche) :
+https://blockchain.info/unspent?active=33Qz2JaLTPRN3wXmG9dRVzFDLiMh6C5QFb

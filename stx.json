@@ -1,0 +1,63 @@
+{
+    "txid": "42f687a8d304c997004c8c95bbc510b618f17e4edd6ef658e9040007d76fcb03",
+    "hash": "42f687a8d304c997004c8c95bbc510b618f17e4edd6ef658e9040007d76fcb03",
+    "block": 2000620,
+    "confirmations": 2671,
+    "version": "2",
+    "locktime": 0,
+    "time": 1622742790,
+    "first_seen": 1622742777,
+    "propagation": null,
+    "double_spend": false,
+    "size": 223,
+    "vsize": 223,
+    "input_amount": "0.02850000",
+    "input_amount_int": 2850000,
+    "output_amount": "0.02805000",
+    "output_amount_int": 2805000,
+    "fee": "0.00045000",
+    "fee_int": 45000,
+    "fee_size": "201.79372197",
+    "coinbase": false,
+    "input_count": 1,
+    "inputs": [
+        {
+            "addresses": [
+                "mozebpMjZjBVqgKAXWHYtgwrNdq4JTeVgA"
+            ],
+            "value": "0.02850000",
+            "value_int": 2850000,
+            "txid": "60ff4e0017ef63401c71e1c38d1809de59c6d554e14956a97c36e8bd7ed68d5b",
+            "vout": 0,
+            "script_sig": {
+            "asm": "304402206c07f0fcbbc52aab535db6e4b9ee74d3836679699bfaf1946c733d5eea4f2fb6022003dd5005d106cadb351f3b0495ff6c8d0ccd2e62971db28c704ddcdcf5418f7101 046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768",
+            "hex": "47304402206c07f0fcbbc52aab535db6e4b9ee74d3836679699bfaf1946c733d5eea4f2fb6022003dd5005d106cadb351f3b0495ff6c8d0ccd2e62971db28c704ddcdcf5418f710141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768"
+            },
+            "type": "pubkeyhash",
+            "witness": [
+            "NULL"
+            ],
+            "sequence": 4294967295
+        }
+    ],
+    "output_count": 1,
+    "outputs": [
+        {
+            "addresses": [
+                "n1kwp1iE588KJsaFxgtRMPUURPUgCywGHR"
+            ],
+            "value": "0.02805000",
+            "value_int": 2805000,
+            "n": 0,
+            "script_pub_key": {
+                "asm": "OP_DUP OP_HASH160 de07ef812a082d7c2e1866da69003b38718cdbb2 OP_EQUALVERIFY OP_CHECKSIG",
+                "hex": "76a914de07ef812a082d7c2e1866da69003b38718cdbb288ac"
+            },
+            "req_sigs": 1,
+            "type": "pubkeyhash",
+            "spend_txid": null
+        }
+    ],
+    "tx_index": 60321291,
+    "block_index": 1
+}

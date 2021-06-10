@@ -1,55 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 import "./test.css"
 
 function Test() {
-
-  const handleSubmit=e=>{
-    e.preventDefault()
-    let formData=new FormData(e.target)
-    //formData.append('file', 'Hello')
-    let requestOptions={
-      method: 'POST',
-      body: formData,
-      //mode: 'no-cors'
-      headers: {
-        'Accept': 'application/json',
-      },
-    }
-    fetch("http://127.0.0.1:8000/api/importregions", requestOptions)
-    .then(response=>response.json())
-    .then(res=>console.log(res))
-    .catch(err=>console.log("erreur", err))
-    return false
-
+  const [state, setstate] = useState({selected: null})
+  const handleSelect=e=>{
+    setstate({selected: e.target.files[0]})
   }
-  const test=()=>{
-    let data=new FormData()
-    //data.append('tel1','123456789')
-    let requestOptions={
-      method: 'POST',
-      body: data,
-      //mode: 'no-cors'
-      // headers: {
-      //   'Accept': 'application/json',
-      // },
-    }
-    fetch("https://risene-api.herokuapp.com/api/updateentreprise/8", requestOptions)
-    .then(response=>response.json())
-    .then(res=>console.log(res))
-    .catch(err=>console.log("erreur", err))
+  const send=()=>{
+    let form=new FormData()
+    form.append('file', state.selected, state.selected.name)
+    axios.post('http://127.0.0.1:8000/api/importarrondissements', form).then(response=>console.log(response)).catch(err=>console.log(`err : `, err))
   }
+  console.log(state)
   return (
     <>
-      <h1>Hello Word</h1>
-      <form onSubmit={e=>handleSubmit(e)} encType="multipart/form-data" >
-        <label htmlFor="file">fichier</label>
-        <input type="file" name="file" id="file"/>
-        <br/>
-        <button type="submit">Envoyer</button>
-      </form>
-      <br/>
-      <button onClick={test}>test</button>
+      <h1>Test d'un formulaire</h1>
+      <div>
+        <label htmlFor="file">selectionner le fichier</label>
+        <input type='file' id='file' name='file' onChange={handleSelect} /> <br/>
+        <button onClick={send}>envoyer</button>
+      </div>
     </>
   )
 }

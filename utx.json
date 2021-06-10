@@ -1,0 +1,79 @@
+{
+    "txid": "374e3237bf3045c8dfe8e122c8cffba696f3bda71400f27af05500c6c822eaaf",
+    "hash": "0603c6cf7bb75b2bf20dd1f74ba703d3e3bef32f19259ff1fa46b8e1c5f05857",
+    "block": 2000645,
+    "confirmations": 2646,
+    "version": "2",
+    "locktime": 2000643,
+    "time": 1622743994,
+    "first_seen": 1622743943,
+    "propagation": null,
+    "double_spend": false,
+    "size": 226,
+    "vsize": 145,
+    "input_amount": "0.05209033",
+    "input_amount_int": 5209033,
+    "output_amount": "0.05208886",
+    "output_amount_int": 5208886,
+    "fee": "0.00000147",
+    "fee_int": 147,
+    "fee_size": "1.01379310",
+    "coinbase": false,
+    "input_count": 1,
+    "inputs": [
+        {
+            "addresses": [
+                "tb1q3dwz0sllduhwfh95ucahvd3enqncgudldhnzqt"
+            ],
+            "value": "0.05209033",
+            "value_int": 5209033,
+            "txid": "c640a49df8d08692696251869bf6d49a45b3e8d9c4586d58d60e49016971166c",
+            "vout": 0,
+            "script_sig": {
+                "asm": "",
+                "hex": ""
+            },
+            "type": "witness_v0_keyhash",
+            "witness": [
+                "304402207f2e03c8114a4bb5cac224ff3da89d43a2ab18c90b42b5e39dc49268d0c23df702207a7b2b72982ac2afe1f3b09fd213ce002ae437624facd6052070ddadde5974c401",
+                "024ab443c3ffb0e7cd872a08801ffebfe069b5492bb9e7d3ebd0cb0e2271c44f1c"
+            ],
+            "sequence": 4294967294
+        }
+    ],
+    "output_count": 2,
+    "outputs": [
+        {
+            "addresses": [
+                "mozebpMjZjBVqgKAXWHYtgwrNdq4JTeVgA"
+            ],
+            "value": "0.00100000",
+            "value_int": 100000,
+            "n": 0,
+            "script_pub_key": {
+                "asm": "OP_DUP OP_HASH160 5cfde21a42acd074450a247d28aecafad58c95c6 OP_EQUALVERIFY OP_CHECKSIG",
+                "hex": "76a9145cfde21a42acd074450a247d28aecafad58c95c688ac"
+            },
+            "req_sigs": 1,
+            "type": "pubkeyhash",
+            "spend_txid": null
+        },
+        {
+            "addresses": [
+                "2N2EJ5ApJ2DHsYY4cpVs1MZWUmpbzTU2h2P"
+            ],
+            "value": "0.05108886",
+            "value_int": 5108886,
+            "n": 1,
+            "script_pub_key": {
+                "asm": "OP_HASH160 628c201d44964a3c3be37d8e9e91eb51a29bcb25 OP_EQUAL",
+                "hex": "a914628c201d44964a3c3be37d8e9e91eb51a29bcb2587"
+            },
+            "req_sigs": 1,
+            "type": "scripthash",
+            "spend_txid": "a526d38fb630fa1e71fb3e6e884abf7a003dc9255fd0ff3d93c9ce0fb9caaa65"
+        }
+    ],
+    "tx_index": 60321384,
+    "block_index": 7
+}
