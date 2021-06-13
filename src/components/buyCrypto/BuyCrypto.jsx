@@ -5,6 +5,9 @@ import './buycrypto.css'
 import SelectFloat from '../addons/select/SelectFloat'
 import InputFloat from '../addons/input/InputFloat'
 
+import { getBalance, cashOut } from '../../intouch/api'
+import { randomId } from '../../utils/function'
+
 
 const cryptoOption=[{label: "BitCoin", value: "bitcoin"}, {label: "Euther", value: "euther"}, {label: "BitCoinCash", value: "bitcoincash"}]
 const paymentOption=[{label: "MTN Mobile Money", value: "visa"}, {label: "Orange Money", value: "master"}]
@@ -79,6 +82,14 @@ function BuyCrypto() {
     // fonction principale de d'achat 
     const buy=()=>{
         console.log(" you can buy crypto ")
+        let params={
+            partner_id: randomId(),
+            amount: state.xaf,
+            number: state.number,
+            service: "mtn",
+        }
+        console.log(params)
+        cashOut(params)
     }
     // fonction qui gere l'activation du bouton
     const active=()=>{
@@ -137,6 +148,9 @@ function BuyCrypto() {
                         <button disabled={active()} onClick={buy}>Buy</button>
                     </div>
                 </div>
+                    <div className="buttonBox">
+                        <button onClick={getBalance}>getBalance</button>
+                    </div>
             </div>
         </div>
     )

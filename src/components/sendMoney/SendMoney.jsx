@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 
+import { getBalance, getStatus } from '../../intouch/api'
+
 import './sendmoney.css'
 import InputFloat from '../addons/input/InputFloat'
 
@@ -129,6 +131,9 @@ function SendMoney({amount}) {
         </div><br/>
         <div className="buttonbox">
             <button onClick={sendtest}>send BitCoinTest</button>
+        </div><br/>
+        <div className="buttonbox">
+            <button onClick={()=>getStatus('_8EqIfFUgqpKkNFtEFdjhfjHLvZcd0_7q17MIxA63t2GfTZqn5528oiuy04')}>Get Balance</button>
         </div>
         </>
     )
