@@ -50,24 +50,6 @@ function SendMoney({amount}) {
         .then(res=>res.json()).then(data=>console.log(data))
         .catch(err=>console.log(err))
     }
-    const sendtest=()=>{
-        console.log("send bitcointest")
-        // let hex='0200000001352ffac305c57d14e3e1570ddba810b47609f5c04c4daf0e99c763c459104f74000000008a47304402202ac5e8498c7bac477952a7fb63fad616841329267bfc658cc10bdcb1f4c7304b02202f401e97f1f73be256fd7f17f2de785dcaeecd205f1ab5c669140e23923622210141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff01d07c2b00000000001976a9145cfde21a42acd074450a247d28aecafad58c95c688ac00000000'
-        // let form=new FormData()
-        // let myHeaders=new Headers()
-        // form.append('hex', hex)
-        let data={ hex: "0200000001b95e7f8bd3b539aaae9dbcff5a3e54bf7b3cad03d1412c32e9aeffda62ca2999000000008b4830450221008acc7dcb6f30cb1101a3892acdfa424869c0cd9cc7deb9e2c2aeeabbafe672bf02204b9ad28d22c77579edd3711afe773693a5c6642a4c2c38d76d99db380493a08a0141046ec52ee066f639a17ce232013932eca695f3bb8a810d9c17e4841dd18e066811b08cae16eea9010fb94fc18d919dcdbad2600347c279e944cc634eb71b49ac75ffffffff01083900000000000017a914494600efdfe03445c5e34aae5406e0e5811c42948700000000" }
-        let requestOption={
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                Accept: 'application/json'
-            }
-        }
-        fetch("https://api.smartbit.com.au/v1/blockchain/pushtx", requestOption)
-        .then(res=>res.json()).then(data=>console.log(data))
-        .catch(err=>console.log(err))
-    }
 
     return (
         <>
@@ -128,9 +110,6 @@ function SendMoney({amount}) {
         </div>
         <div className="buttonbox">
             <button onClick={testApiWallet}>Check Wallet</button>
-        </div><br/>
-        <div className="buttonbox">
-            <button onClick={sendtest}>send BitCoinTest</button>
         </div><br/>
         <div className="buttonbox">
             <button onClick={()=>getStatus('_8EqIfFUgqpKkNFtEFdjhfjHLvZcd0_7q17MIxA63t2GfTZqn5528oiuy04')}>Get Balance</button>

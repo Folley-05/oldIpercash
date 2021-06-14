@@ -6,6 +6,7 @@ const serveiceId={
 	cashInMtn: 'CASHINMTNCM',
 }
 
+// fonction qui retourne le solde du compte intouch
 const getBalance=()=>{
     let requestOption={
         method: 'POST'
@@ -14,17 +15,22 @@ const getBalance=()=>{
     .catch(err=>console.log('err :>> ', err))
 }
 
-const getStatus=id=>{
+// fontion qui retourne le statut d'une operation
+const getStatus=async(id)=>{
     let formData=new FormData()
     formData.append('partner_id', id)
     let requestOption={
         method: 'POST',
         body: formData,
     }
-    fetch(apiUrl+'getstatus', requestOption).then(response=>response.json()).then(data=>console.log(data))
-    .catch(err=>console.log('err :>> ', err))
+    let status= await fetch(apiUrl+'getstatus', requestOption).then(response=>response.json())
+    .then(({intouch})=>{
+        return intouch.status
+    })
+    return status
 }
 
+// fonction qui retire de l'argent du compte du client
 const cashOut=params=>{
     let formData=new FormData()
     formData.append('partner_id', params.partner_id)
@@ -35,11 +41,30 @@ const cashOut=params=>{
         method: 'POST',
         body: formData
     }
-    fetch(apiUrl+'cashout', requestOption).then(response=>response.json()).then(data=>console.log(data))
+    fetch(apiUrl+'cashout', requestOption).then(response=>response.json())
+    .then(data=>{
+        console.log(data)
+        if(data.intouch) {
+            console.log("c'est arrive chez intouch")
+            if(data.status==="PENDING") {
+                console.log("la requete est en attente chez intouch")
+                return params.partner_id
+            }
+            else {
+                console.log("intouch a rejette la requete")
+                return false
+            }
+        }
+        else {
+            console.log("y a eu une erreur")
+            return false
+        }
+    })
     .catch(err=>console.log('err :>> ', err))
 
 }
 
+// fonction qui envoie de l'argent vers le compte du client
 const cashIn=params=>{
     let formData=new FormData()
     formData.append('partner_id', params.partner_id)
