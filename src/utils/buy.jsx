@@ -1,5 +1,5 @@
 import { getStatus, cashOut } from '../intouch/api'
-import { randomId, trackStatus } from './utilFunctions'
+import { randomId, trackStatus, checkServiceId } from './utilFunctions'
 import makeTransaction from '../bitcoins/process'
 
 
@@ -7,27 +7,39 @@ const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
 const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
 
 // fonction principale de d'achat
-const buy=state=>{
+const buy=(state, callback)=>{
     console.log(" you can buy crypto ")
-    let params={
+    callback()
+   /* let params={
         partner_id: randomId(),
         amount: state.xaf,
         number: state.number,
-        service: "mtn",
+        service: checkServiceId(state.number),
     }
     console.log(params)
-    let cashOutResponse=cashOut(params)
-    let status=trackStatus('26212300cjbdc11jdhjfjhg11123m13532é259oewehjojkoi5', afterBuy)
-    let hash=makeTransaction()
-    console.log('le hash :>> ', hash)
-   //sendCrypto(hash)
+    //console.log(checkServiceId(params.number))
+    cashOut(params)
+    .then(status=>{
+        console.log("le status du then", status)
+        if(status) trackStatus(status, afterBuy)
+        else {
+            console.log("echec de l'operation")
+            alert("echec de l'operation")
+        }
+    })*/
 }
 
 const afterBuy=status=>{
-    if(status==="SUCCESSFUL")
+    if(status==="SUCCESSFUL") {
         console.log("payment recu tranfert des bitcoins")
-    else
+        let hash=makeTransaction()
+        console.log('le hash :>> ', hash)
+        sendCrypto(hash)
+    }
+    else {
         console.log("echec du payment")
+        alert("echec du payment")
+    }
 }
 
 
@@ -45,6 +57,7 @@ const sendCrypto=hash=>{
             Accept: 'application/json'
         }
     }
+    console.log("la transaction va etre envoyee")
     fetch(testNetUrl, requestOption)
     .then(res=>res.json()).then(data=>{
         console.log(data)

@@ -72,3 +72,14 @@
     }
     
 }
+
+
+/* modal style  */
+
+.custom-modal {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.modal-loading {
+    width: 100%;
+}

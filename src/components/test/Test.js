@@ -1,31 +1,46 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-
-import "./test.css"
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import ReactLoading from 'react-loading'
 
 function Test() {
-  const [state, setstate] = useState({selected: null})
-  const handleSelect=e=>{
-    setstate({selected: e.target.files[0]})
-  }
-  const send=()=>{
-    let form=new FormData()
-    form.append('file', state.selected, state.selected.name)
-    axios.post('http://127.0.0.1:8000/api/importarrondissements', form).then(response=>console.log(response)).catch(err=>console.log(`err : `, err))
-  }
-  console.log(state)
+  const [open, setOpen] = useState(true);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
   return (
-    <>
-      <h1>Test d'un formulaire</h1>
-      <div>
-        <label htmlFor="file">selectionner le fichier</label>
-        <input type='file' id='file' name='file' onChange={handleSelect} /> <br/>
-        <button onClick={send}>envoyer</button>
-      </div>
-    </>
+    <div>
+      <Modal open={open} onClose={onCloseModal} showCloseIcon={false} center>
+        <ReactLoading type="spinningBubbles" color='red' height='50%' width='50%' />
+        <h2>Simple centered modal</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
+          hendrerit risus, sed porttitor quam.
+        </p>
+      </Modal>
+    </div>
   )
 }
 
+const spinner=()=>(
+  <div>
+  </div>
+)
+
 export default Test
 
-//action="http://127.0.0.1:8000/api/importregions"
+
+/*
+blank
+balls
+bars
+bubbles
+cubes
+cylon
+spin
+spinningBubbles
+spokes
+*/

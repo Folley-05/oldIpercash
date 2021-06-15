@@ -1,7 +1,15 @@
 import { getStatus } from '../intouch/api'
 
 const checkServiceId=num=>{
-
+    console.log("le numero ",num)
+    if(num[1]==='7') return 'mtn'
+    else if(num[1]==='8') return 'orange'
+    else if(num[1]==='9') return 'orange'
+    else if(num[1]==='5') {
+        console.log("on entre dans les details")
+        if(num[2]<=4) return 'mtn'
+        else return 'orange'
+    }
 }
 
 const randomId=()=>{
@@ -11,6 +19,7 @@ const randomId=()=>{
 }
 
 const trackStatus=(id, callBack)=>{
+    console.log("trackstatus")
     let valid=false
     let status="PENDING"
     //getStatus(id)
@@ -22,16 +31,18 @@ const trackStatus=(id, callBack)=>{
             callBack(newStatus)
         }
         //console.log("le status  de trackstatus: ", newStatus)
-    }, 5000);
-    /*setTimeout(() => {
+    }, 10000);
+    setTimeout(() => {
         clearInterval(interval)
-    }, 25000);*/
+        cancel()
+    }, 5*60*1000);
     return status
 
 }
 
 const cancel=()=>{
     console.log("arret de toute activite")
+    alert("arret de toute activite, le processus a echoue")
 }
 
 export { randomId, trackStatus, cancel, checkServiceId }

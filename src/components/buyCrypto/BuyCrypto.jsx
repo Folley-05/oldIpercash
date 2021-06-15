@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { FaCcVisa, FaCcMastercard } from 'react-icons/fa'
+import { Modal } from 'react-responsive-modal';
+import ReactLoading from 'react-loading'
 
 import './buycrypto.css'
 import SelectFloat from '../addons/select/SelectFloat'
 import InputFloat from '../addons/input/InputFloat'
+// import ModalLoading from '../addons/modals/ModalLoading'
 
 import buy from '../../utils/buy'
 
@@ -22,6 +25,8 @@ function BuyCrypto() {
     const [state, setState] = useState({
         crypto: "BTC", operator: "", amount: 0, xaf: 0, eu: 0, rate: rate.BTC, number: "", confirmNumber: "", wallet: ""
     })
+    const [modal, setModal] = useState(false)
+    const openModal=()=>setModal(!modal)
     //on va charcher les bons taux de changes 
     // useEffect(() => {
     //     fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
@@ -95,9 +100,15 @@ function BuyCrypto() {
         })
         if(icon!==null) return Icon[icon].icon
     }
-    console.log();
+    console.log(modal);
     return (
         <div className="buy-crypto">
+            <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
+                <h2>transaction en cours</h2>
+                <div className="modal-loading">
+                    <ReactLoading type="spinningBubbles" color='red' height='50%' width='50%' />
+                </div>
+            </Modal>
             <div className="buy-container">
                 <h1 className="title">buy Crypto Currencies</h1>
                 <div className="buy-form">
@@ -132,7 +143,7 @@ function BuyCrypto() {
                         <InputFloat label="Crypto Wallet Address" theme="ligth" name="wallet" change={handleChange} />
                     </div>
                     <div className="buttonBox">
-                        <button disabled={active()} onClick={()=>buy(state)}>Buy</button>
+                        <button disabled={active()} onClick={()=>buy(state, openModal)}>Buy</button>
                     </div>
                 </div>
             </div>

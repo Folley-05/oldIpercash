@@ -15,7 +15,7 @@ const Modal=({dim, isShowing, hide, ...props}) => isShowing ? ReactDom.createPor
         </div>
     </div>
 , document.body) : null
-       
+
 
 export default Modal
                

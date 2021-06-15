@@ -20,7 +20,7 @@ const makeTransaction=(recipient, amount)=>{
     let amountWeKeep=amountWeHave-amountWeSend-fee
     
     // id de la transaction
-    tx.addInput("a3bf7d1604039c2c9decbc94c70f154b76049634e38b9ab3a278f8014c0b2e58", 1)
+    tx.addInput("a3bf7d1604039c2c9decbc94c70f154b76049634e38b9ab3a278f8014c0b2e58", 0)
     //console.log("\n\n la transaction 1",tx)
     
     // adresse de destination

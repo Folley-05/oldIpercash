@@ -5,7 +5,7 @@ import './App.css'
 import AppRoot from './AppRoot'
 import store from './redux/store'
 
-// import Test from './components/test/Test'
+import Test from './components/test/Test'
 
 function App() {
 	return (
