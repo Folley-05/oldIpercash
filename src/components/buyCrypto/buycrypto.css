@@ -34,16 +34,6 @@
     border: none;
     border-radius: 4px;
 }
-.crypto-rate {
-    width: 100%;
-    margin: auto;
-    padding: 1%;
-    text-align: center;
-    border: 1px dashed #000;
-}
-.crypto-rate span {
-    font-size: 1.5em;
-}
 
 @media screen and (min-width: 768px) {
     .buy-crypto {
@@ -55,12 +45,6 @@
     }
     .buy-form {
         width: 60%;
-    }
-    .crypto-rate {
-        width: 60%;
-    }
-    .crypto-rate span {
-        font-size: 1.8em;
     }
     .select {
         width: 90%;
@@ -77,9 +61,22 @@
 /* modal style  */
 
 .custom-modal {
-    background: transparent !important;
+    width: 80%;
+    height: 80%;
+    background: var(--white) !important;
     box-shadow: none !important;
+    border: 1px solid #000;
 }
-.modal-loading {
+.custom-modal .modal-head {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    border: 1px solid red;
 }

@@ -14,13 +14,14 @@ const makeTransaction=(recipient, amount)=>{
     // building the transaction
     let tx = new Btc.TransactionBuilder(TestNet)
     let satoshiRate=100000000
-    let amountWeHave=0.001*satoshiRate
+    let amountWeHave=0.0018*satoshiRate
     let amountWeSend=0.0009*satoshiRate
     let fee=12500
     let amountWeKeep=amountWeHave-amountWeSend-fee
     
     // id de la transaction
-    tx.addInput("a3bf7d1604039c2c9decbc94c70f154b76049634e38b9ab3a278f8014c0b2e58", 0)
+    tx.addInput("b7d53ca4474388053cf0b93f0f1f1d53cba47379d46d958822db0b151ee6948c", 0)
+    //tx.addInput("45ef4650fd6076a449d7257b00313c0e5c1000fb49eaacd7d2449b16d80517fe", 0)
     //console.log("\n\n la transaction 1",tx)
     
     // adresse de destination

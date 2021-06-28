@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { FaCcVisa, FaCcMastercard } from 'react-icons/fa'
 import { Modal } from 'react-responsive-modal';
 import ReactLoading from 'react-loading'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import StepContent from '@material-ui/core/StepContent'
 
 import './buycrypto.css'
 import SelectFloat from '../addons/select/SelectFloat'
 import InputFloat from '../addons/input/InputFloat'
-// import ModalLoading from '../addons/modals/ModalLoading'
+import CryptoRate from '../addons/cryptoRate/CryptoRate'
 
 import buy from '../../utils/buy'
 
@@ -27,6 +31,11 @@ function BuyCrypto() {
     })
     const [modal, setModal] = useState(false)
     const openModal=()=>setModal(!modal)
+    const [step, setStep] = useState(0)
+    const changeStep=()=>{
+        console.log("change step")
+        setStep(step+1)
+    }
     //on va charcher les bons taux de changes 
     // useEffect(() => {
     //     fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
@@ -85,7 +94,7 @@ function BuyCrypto() {
     }
     // fonction qui gere l'activation du bouton
     const active=()=>{
-        if( (state.crypto && state.operator && state.amount && state.number && state.wallet) && (state.number===state.confirmNumber) )
+        if( (state.amount && state.number && state.wallet) && (state.number===state.confirmNumber) )
             return false
         else return true
     }
@@ -104,22 +113,38 @@ function BuyCrypto() {
     return (
         <div className="buy-crypto">
             <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
-                <h2>transaction en cours</h2>
-                <div className="modal-loading">
-                    <ReactLoading type="spinningBubbles" color='red' height='50%' width='50%' />
+                <div className="modal-head">
+                    <h2>transaction en cours </h2>
+                    <ReactLoading type="spinningBubbles" color='#000' height={50} width={50} />
+                </div>
+                <div className="content-modal">
+                    <Stepper orientation='vertical' activeStep={step}>
+                        <Step>
+                            <StepLabel>preparation des fonds</StepLabel>
+                            <StepContent>
+                                verification de la validite du wallet et de la presence de fonds
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            <StepLabel>reception du payment mobile</StepLabel>
+                            <StepContent>
+                                For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and geographical locations you want your ads to show on, and more.
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            <StepLabel>envoie des fonds</StepLabel>
+                        </Step>
+                    </Stepper>
                 </div>
             </Modal>
             <div className="buy-container">
                 <h1 className="title">buy Crypto Currencies</h1>
                 <div className="buy-form">
-                    <div className="selectBox">
+                    {/* <div className="selectBox">
                         <div className="select"><SelectFloat label="Choose Crypto :" name="crypto" change={handleCurrencies} theme="ligth" option={cryptoOption} /></div>
                         <div className="icon"> <FaCcVisa size={40} /> </div>
-                    </div>
-                    <div className="crypto-rate">
-                        <h3>Crypto Rate</h3>
-                        <span>1 {state.crypto} === {state.rate*655} XAF === {state.rate} EU</span>
-                    </div>
+                    </div> */}
+                    <CryptoRate crypto={state.crypto} rate={state.rate} />
                     <div className="inputBox">
                         <InputFloat label="Amount In XAF" name="xaf" theme="ligth" change={amountChange} val={state.xaf} />
                     </div>
@@ -129,10 +154,10 @@ function BuyCrypto() {
                     <div className="inputBox">
                         <InputFloat label="Amount In Crypto" name="crypto" theme="ligth" change={amountChange} val={state.amount} />
                     </div>
-                    <div className="selectBox">
+                    {/* <div className="selectBox">
                         <div className="select"><SelectFloat label="Mobile Money Operator :" name="operator" change={handleChange} theme="ligth" option={paymentOption} /></div>
                         <div className="icon"> {selectIcon()} </div>
-                    </div>
+                    </div> */}
                     <div className="inputBox">
                         <InputFloat label="Mobile Phone Number" theme="ligth" name="number" change={handleChange} />
                     </div>
@@ -143,7 +168,7 @@ function BuyCrypto() {
                         <InputFloat label="Crypto Wallet Address" theme="ligth" name="wallet" change={handleChange} />
                     </div>
                     <div className="buttonBox">
-                        <button disabled={active()} onClick={()=>buy(state, openModal)}>Buy</button>
+                        <button disabled={active()} onClick={()=>buy(state, openModal, changeStep)}>Buy</button>
                     </div>
                 </div>
             </div>

@@ -7,10 +7,13 @@ const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
 const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
 
 // fonction principale de d'achat
-const buy=(state, callback)=>{
+const buy=(state, callback1, callback2)=>{
     console.log(" you can buy crypto ")
-    callback()
-   /* let params={
+    callback1()
+    setTimeout(() => {
+        callback2()
+    }, 3000);
+    let params={
         partner_id: randomId(),
         amount: state.xaf,
         number: state.number,
@@ -18,7 +21,7 @@ const buy=(state, callback)=>{
     }
     console.log(params)
     //console.log(checkServiceId(params.number))
-    cashOut(params)
+    /*cashOut(params)
     .then(status=>{
         console.log("le status du then", status)
         if(status) trackStatus(status, afterBuy)
