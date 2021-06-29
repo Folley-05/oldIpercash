@@ -13,6 +13,7 @@ import InputFloat from '../addons/input/InputFloat'
 import CryptoRate from '../addons/cryptoRate/CryptoRate'
 
 import buy from '../../utils/buy'
+import {roundDecimal} from '../../utils/utilFunctions'
 
 
 const cryptoOption=[{label: "BitCoin", value: "bitcoin"}, {label: "Euther", value: "euther"}, {label: "BitCoinCash", value: "bitcoincash"}]
@@ -74,18 +75,18 @@ function BuyCrypto() {
     // fonction qui gere les changements de montants
     const amountChange=e=>{
         switch (e.name) { // amount c'est le montant en crypto monnaie 
-            case "amount":
+            case "crypto":
                 console.log("c'est le montant")
-                setState({...state, amount: e.value, xaf: e.value*state.rate*655, eu: e.value*state.rate})
+                setState({...state, amount: e.value, xaf: roundDecimal(e.value*state.rate*655+1350), eu: roundDecimal(e.value*state.rate+1350/650)})
             break
             case "xaf":
                 console.log("c'est le xaf")
-                setState({...state, xaf: e.value, amount:e.value/state.rate/655, eu: e.value/655})
+                setState({...state, xaf: e.value, amount: roundDecimal(e.value/state.rate/655-0.000045), eu: roundDecimal(e.value/655)})
             break;
             
             case "eu":
                 console.log("c'est le eu")
-                setState({...state, eu: e.value, amount:e.value/state.rate, xaf: e.value*655})
+                setState({...state, eu: e.value, amount: roundDecimal(e.value/state.rate-0.000045), xaf: e.value*655})
             break;
             default:
                 console.log("c;est autre chose")

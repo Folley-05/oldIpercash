@@ -40,6 +40,9 @@ function SendMoney({amount}) {
         api.on('WIDGET_CLOSE', event=>console.log("le widget c'est ferme"))
         .on('WIDGET_CONFIG_DONE', event=>console.log(event.type))
         .on('WIDGET_CLOSE_REQUEST_CANCELLED', event=>console.log("vous avez bien fait d'annuler"))
+        .on('PURCHASE_CREATED', event=>console.log("creation de la transaction d'achat", event))
+        .on('PURCHASE_SUCCESSFUL', event=>console.log("la transaction d'achat a reussie", event))
+        .on('PURCHASE_FAILED', event=>console.log("la transaction d'achat a echouee", event))
         .show()
     }
     console.log(amount);

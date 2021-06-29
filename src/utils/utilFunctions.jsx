@@ -1,5 +1,11 @@
 import { getStatus } from '../intouch/api'
 
+const roundDecimal=(nombre)=>{
+    var precision = 8;
+    var tmp = Math.pow(10, precision);
+    return Math.round( nombre*tmp )/tmp;
+}
+
 const checkServiceId=num=>{
     console.log("le numero ",num)
     if(num[1]==='7') return 'mtn'
@@ -45,4 +51,4 @@ const cancel=()=>{
     alert("arret de toute activite, le processus a echoue")
 }
 
-export { randomId, trackStatus, cancel, checkServiceId }
+export {roundDecimal, randomId, trackStatus, cancel, checkServiceId }

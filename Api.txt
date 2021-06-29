@@ -44,6 +44,12 @@ tx2: a3bdc8146aed58e6b7fecb5b4da11dc516d0d127fac10d275cecd9e1073f3d75   0.001
 my mainnet address: 1EuUTQes6r5F9iGHvajUPifkQYpoch1yHZ
 private key: 5KdpAFiuQq8F67EAFQVwEkNyBnMmooNWx3NVgLMjX6kd43igsRC
 
+my second mainnet address: 1PcBi3WJ2mENgyjBQm4sVgKiKHAo2ZHL1x
+private key: 5KFqQm7CNLvLetm1ZEtNCFmKKt4UpW2w8uw94g1DFa82Bp5hiTL
+
 ma transaction sur le mainnet : 0dfbb826e7ded222dbc61f1f67f261edfc02ed6f3148277929971b0df584b3ef
 
 premier test avec mr feuzeu txid: 8363a9780a6591ebdf8376136bd2d19aa313f286e6796535afc9f786d292dbcc
+
+la transaction sur pulsa
+0bef727d2eb1245c2555d84b410ff070bcdcbf66ba3ade4541992dbd60281e43

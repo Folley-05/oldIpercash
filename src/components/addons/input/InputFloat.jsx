@@ -12,7 +12,7 @@ function InputFloat({label, placeholder, name, required, theme, change, val}) {
 	}, [])
 	useEffect(() => {
 		setValue(val)
-		// console.log("j'ai change")
+		// console.log("j'ai change ", val)
 	}, [val])
   	const handleChange=e=>{
 		setValue(e.value)
@@ -26,11 +26,21 @@ function InputFloat({label, placeholder, name, required, theme, change, val}) {
 				place=false
 		}
   	}
+	const blur=e=>{
+		console.log('blur :>> ', e.value)
+		if(e.value=='') {
+			let event={name: e.name, value: 0}
+			setValue(0)
+			if(change) change(event)
+			setIsActive(true)
+		}
+	}
 	return (
 		<div className={`float-label ${theme}`}>
 			<input type="text" value={value}
 				name={name} 
 				onChange={e=>handleChange(e.target)} 
+				onBlur={e=>blur(e.target)}
 				placeholder={isActive && place ? placeholder : ''} 
 				required={required}
 			/>
