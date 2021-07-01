@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 
-import { getBalance, getStatus } from '../../intouch/api'
-
 import './sendmoney.css'
 import InputFloat from '../addons/input/InputFloat'
 
@@ -29,10 +27,10 @@ function SendMoney({amount}) {
             url: 'https://ri-widget-staging.firebaseapp.com',
             hostAppName : 'Ipercash', 
             hostLogoUrl : 'https://ramp.ipercash.fr/static/media/logo-ipercash.7177814f.png',
-            swapAsset: 'BCH',
+            swapAsset: 'BTC',
             fiatCurrency: 'EUR',
             fiatValue: state.amount,
-            userAddress: 'qpv6j55d02e0dyh2x08t0vgrpurkkjzupqhxzlzxsq',
+            userAddress: '1LNRokCA5YMH82nzcwumyJW4YNJCJorXtB',
             //variant: 'embedded-desktop',
             containerNode: document.getElementById('ramp'),
             hostApiKey: 'wcc36f3psojgdhm3286fwzqnybrpg3gvbeyhcmcp',
@@ -45,14 +43,8 @@ function SendMoney({amount}) {
         .on('PURCHASE_FAILED', event=>console.log("la transaction d'achat a echouee", event))
         .show()
     }
-    console.log(amount);
-
-    const testApiWallet=()=>{
-        console.log("test wallet api")
-        fetch("https://testnet-api.smartbit.com.au/v1/blockchain/address/mozebpMjZjBVqgKAXWHYtgwrNdq4JTeVgA", {method: 'GET'})
-        .then(res=>res.json()).then(data=>console.log(data))
-        .catch(err=>console.log(err))
-    }
+    console.log(amount)
+    
 
     return (
         <>
@@ -110,12 +102,6 @@ function SendMoney({amount}) {
                     <p class="mb-0">Make sure you have entered the correct Mobile Account phone number.</p>
                 </div>
             </div>
-        </div>
-        <div className="buttonbox">
-            <button onClick={testApiWallet}>Check Wallet</button>
-        </div><br/>
-        <div className="buttonbox">
-            <button onClick={()=>getStatus('_8EqIfFUgqpKkNFtEFdjhfjHLvZcd0_7q17MIxA63t2GfTZqn5528oiuy04')}>Get Balance</button>
         </div>
         </>
     )

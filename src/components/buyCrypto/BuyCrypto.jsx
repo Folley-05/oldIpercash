@@ -110,7 +110,7 @@ function BuyCrypto() {
         })
         if(icon!==null) return Icon[icon].icon
     }
-    console.log(modal);
+    //console.log(modal);
     return (
         <div className="buy-crypto">
             <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>

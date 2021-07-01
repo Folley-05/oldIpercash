@@ -8,7 +8,9 @@ const utxoUrl='https://blockchain.info/unspent?active='
 const makeTransaction=async (recipient, amount)=>{
     console.log('parametre :>> ', recipient, amount)
     let tx=await getUtxoId(amount)
-    if(tx.status==='success') {
+    return tx
+    
+    /*if(tx.status==='success') {
         let hex
         try {
             hex=buildTx(recipient, amount, tx)
@@ -17,7 +19,7 @@ const makeTransaction=async (recipient, amount)=>{
             return {status: 'fail', cause: 'transaction build failed', error:error}
         }
     }
-    else return tx
+    else return tx*/
 
 }
 
@@ -27,10 +29,11 @@ const getUtxoId=async (amount)=>{   //recupere et formate les utxo
     .then(response=>response.json()).then(data=>data.unspent_outputs)
     .catch(err=>console.log('err :>> ', err))
     console.log('les utxos :>> ', utxos);
-    if(utxos.length) {
+    return utxos
+    /*if(utxos.length) {
         return {status: 'success', n:utxos[0].tx_output_n, id:utxos[0].tx_hash_big_endian, value:utxos[0].value}
     }
-    else return {status: 'fail', cause: 'manque de fonds'}
+    else return {status: 'fail', cause: 'manque de fonds'}*/
 }
 
 // fonction qui parse la liste des utxo et ressort la meilleure formule a utiliser

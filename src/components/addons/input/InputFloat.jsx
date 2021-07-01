@@ -27,7 +27,7 @@ function InputFloat({label, placeholder, name, required, theme, change, val}) {
 		}
   	}
 	const blur=e=>{
-		console.log('blur :>> ', e.value)
+		//console.log('blur :>> ', e.value)
 		if(e.value=='') {
 			let event={name: e.name, value: 0}
 			setValue(0)

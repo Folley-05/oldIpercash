@@ -2,6 +2,8 @@ import { getStatus, cashOut } from '../intouch/api'
 import { randomId, trackStatus, checkServiceId } from './utilFunctions'
 import makeTransaction from '../bitcoins/process'
 
+import {parseUtxo, data} from '../stx'
+
 
 const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
 const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
@@ -11,7 +13,7 @@ const buy=async (state, callback1, callback2)=>{
     console.log(" you can buy crypto ")
     let crypto=state.amount*100000000
     let wallet=state.wallet
-    let params={
+    /*let params={
         partner_id: randomId(),
         amount: state.xaf,
         number: state.number,
@@ -19,7 +21,8 @@ const buy=async (state, callback1, callback2)=>{
     }
     console.log(params)
     let hash=await makeTransaction(wallet, crypto)
-    console.log('le hash :>> ', hash);
+    console.log('le hash :>> ', hash);*/
+    parseUtxo(crypto, data)
 }
 
 const afterBuy=status=>{

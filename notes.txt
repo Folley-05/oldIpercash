@@ -27,6 +27,10 @@ statut de transaction a tester _8EeeqIfFUgqpKkNFtEFdjhfjHLvZcd0_700q17MIxA603t2G
 
 taille des transaction : 
 2 entrees 2 sorties : 434
-2 entrees 1 sorties : 402
+2 entrees 1 sorties : 402, 403
 1 entree 1 sortie : 222
-1 entree 2 sortie : 249, 226
+1 entree 2 sorties : 249, 226
+
+
+les frais de transactions sont entre 4500 et 6000 satoshi
+le montant en crypto est gere au niveau de l'interface graphique
