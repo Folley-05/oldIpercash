@@ -21,6 +21,7 @@ const makeTransaction=async (recipient, amount)=>{
 
 }
 
+// fonction qui recupere l'id de la ou des transactions a utiliser
 const getUtxoId=async (amount)=>{   //recupere et formate les utxo
     let utxos= await fetch('https://blockchain.info/unspent?active=1EuUTQes6r5F9iGHvajUPifkQYpoch1yHZ', {method: 'GET'})
     .then(response=>response.json()).then(data=>data.unspent_outputs)
@@ -31,6 +32,25 @@ const getUtxoId=async (amount)=>{   //recupere et formate les utxo
     }
     else return {status: 'fail', cause: 'manque de fonds'}
 }
+
+// fonction qui parse la liste des utxo et ressort la meilleure formule a utiliser
+const parseUtxo=(amount, utxos)=>{
+    if(utxos.length) {
+        let indice
+        let min=0
+        let tab
+        tab=utxos.map((data, i)=>{
+            if(data.value>=(amount+4500)) {
+                if(data.value>min){
+                    indice=i
+                }
+                return data
+            }
+        })
+    }
+    else return {status: 'fail', cause: "don't find utxo"}
+}
+
 
 const buildTx=(recipient, amount, utxo)=>{
     // choix du reseau
@@ -48,17 +68,16 @@ const buildTx=(recipient, amount, utxo)=>{
     
     // id de la transaction
     tx.addInput(utxo.id, utxo.n)
-    //console.log("\n\n la transaction 1",tx)
-    //console.log("\n\n la transaction 1",tx)
+    console.log("\n\n la transaction 1",tx)
     
     // adresse de destination
     tx.addOutput(recipient, amount)
     //tx.addOutput("n1kwp1iE588KJsaFxgtRMPUURPUgCywGHR", amountWeKeep)
-    //console.log("\n\n la transaction 2",tx)
+    console.log("\n\n la transaction 2",tx)
     
     // signature de la transaction (avec les information sur le wallet source)
     tx.sign(0, wallet)
-    //console.log("\n\n la transaction 3",tx)
+    console.log("\n\n la transaction 3",tx)
     
     // generation du hachage de la transaction
     let tx_hex = tx.build().toHex()
@@ -66,22 +85,6 @@ const buildTx=(recipient, amount, utxo)=>{
     return tx_hex
 }
 
-const parseUtxo=(amount, utxos)=>{
-    if(utxos.length) {
-        let indice
-        let min=0
-        let tab
-        tab=utxos.map((data, i)=>{
-            if(data.value>=(amount+4500)) {
-                if(data.value>min){
-                    indice=i
-                }
-                return data
-            }
-        })
-    }
-    else return {status: 'fail', cause: "don't find utxo"}
-}
 
 
 export default makeTransaction

@@ -23,3 +23,10 @@ lien pour les frais
 https://bitcoinfees.earn.com/api
 
 statut de transaction a tester _8EeeqIfFUgqpKkNFtEFdjhfjHLvZcd0_700q17MIxA603t2GfTZqn5528oiuy505
+
+
+taille des transaction : 
+2 entrees 2 sorties : 434
+2 entrees 1 sorties : 402
+1 entree 1 sortie : 222
+1 entree 2 sortie : 249, 226
