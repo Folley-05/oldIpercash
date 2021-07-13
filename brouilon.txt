@@ -25,3 +25,31 @@ const buy=(state, callback1, callback2)=>{
         }
     })*/
 }
+
+
+// le code du modal
+            <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
+                <div className="modal-head">
+                    <h2>transaction en cours </h2>
+                    <ReactLoading type="spinningBubbles" color='#000' height={50} width={50} />
+                </div>
+                <div className="content-modal">
+                    <Stepper orientation='vertical' activeStep={step}>
+                        <Step>
+                            <StepLabel>preparation des fonds</StepLabel>
+                            <StepContent>
+                                verification de la validite du wallet et de la presence de fonds
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            <StepLabel>reception du payment mobile</StepLabel>
+                            <StepContent>
+                                For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and geographical locations you want your ads to show on, and more.
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            <StepLabel>envoie des fonds</StepLabel>
+                        </Step>
+                    </Stepper>
+                </div>
+            </Modal>

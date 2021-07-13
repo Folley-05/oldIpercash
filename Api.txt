@@ -37,6 +37,8 @@ tx14: 2600a4a4c9894628b471429873df89dc3329e818031bbe620be960c05590bfd2  0.01554 
 tx15: 98d3febb3859962c8bcc297c8f25256ae7be1212740aecb5cd39fd0291bf1a09  2 entrees 1 sortie
 tx16: c71612b4f174a8f752fb09848a5390e6bce753dd4c31abc960451a80ffe89bae  1 entree 1 sortie
 tx17: 1f5a5bfeef5a0520fbded19f8fc538c2b4e21680f3d25339f62c0adcd3c31c8d  0.001 not spend
+tx18: 6ecb9eae5d090b975301d1b7d811a38c698e2af4c83b07bbab23a8084016abe1  0.001 not spend
+tx19: 7ced1d11e1d888cfafd35a73ad764e13feb6353f075216a41e0c688e63dda9ac  3 entrees 2 sorties
 
 la transaction test : d3f61b0cb833273092ae47e846a7fa580705d3fb6c92d88c9a598ff8ddfa9262
 
@@ -59,3 +61,7 @@ premier test avec mr feuzeu txid: 8363a9780a6591ebdf8376136bd2d19aa313f286e67965
 
 la transaction sur pulsa
 0bef727d2eb1245c2555d84b410ff070bcdcbf66ba3ade4541992dbd60281e43
+
+transaction sur le mainnet
+1e0370edd8da6402b7a77c09b38a711d7e6fa392804a7fe0624874b44b569ae2 frais 4479 1 entree 2 sorties
+depart 7h50 taille 223

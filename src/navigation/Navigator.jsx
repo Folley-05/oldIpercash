@@ -7,6 +7,7 @@ import Footer from '../components/footer/Footer'
 import SendMoney from '../components/sendMoney/SendMoney'
 import BuyCrypto from '../components/buyCrypto/BuyCrypto'
 import SellCrypto from '../components/sellCrypto/SellCrypto'
+import Pay from '../components/Pay/Pay'
 
 function Navigator() {
     return (
@@ -16,6 +17,7 @@ function Navigator() {
                 <Route path="/sendmoney" component={SendMoney} />
                 <Route path="/buycrypto" component={BuyCrypto} />
                 <Route path="/sellcrypto" component={SellCrypto} />
+                <Route path="/transact" component={Pay} />
                 <Route path="/" component={Home} />
             </Switch>
             <Footer />

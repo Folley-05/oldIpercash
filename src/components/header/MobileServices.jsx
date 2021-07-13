@@ -6,11 +6,11 @@ import './mobileservices.css'
 
 function MobileNavigation() {
     return (
-        <div class="">
-          <ul class="nav__list">
+        <div>
+          <ul className="nav__list">
               <input id="group-1" type="checkbox" hidden />
-              <label for="group-1"><span class=""> <FaAngleRight /> </span> Services</label>
-              <ul class="group-list">
+              <label htmlFor="group-1"><span> <FaAngleRight /> </span> Services</label>
+              <ul className="group-list">
                 <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
                 <span className="line"/>
                 <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>

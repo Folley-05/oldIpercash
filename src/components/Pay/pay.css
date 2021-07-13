@@ -1,0 +1,37 @@
+.content-modal {
+    width: 80%;
+    margin: auto;
+
+    border: 1px solid #000;
+}
+.content-modal h2 {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.phone-step {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    border: 1px solid #000;
+}
+.phone-step h4 {
+    text-align: center;
+}
+
+
+.error {
+    width: 60%;
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid #000;
+
+}
+.error h3 {
+    display: flex;
+    justify-content: center;
+}

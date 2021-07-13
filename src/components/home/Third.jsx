@@ -10,38 +10,38 @@ import Bitcoin from './assets/Bitcoin.png'
 function Third() {
     return (
         <div>
-            <div class="text-title">
-                <h2 class="">Only 3 Steps to credit a mobile mobile account</h2>
+            <div className="text-title">
+                <h2 className="">Only 3 Steps to credit a mobile mobile account</h2>
             </div>
-            <div class="desktop-step">
-                <div class="step">
-                    <div class="step-head">
-                        <h3 class="">STEP 1</h3>
-                        <p class="">Create your account</p>
+            <div className="desktop-step">
+                <div className="step">
+                    <div className="step-head">
+                        <h3 className="">STEP 1</h3>
+                        <p className="">Create your account</p>
                         <hr />
                     </div>
-                    <div class="step-body">
-                        <img src={user1} class="img-fluid" alt="" srcset="" />
+                    <div className="step-body">
+                        <img src={user1} className="img-fluid" alt="" />
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-head">
-                        <h3 class="">STEP 2</h3>
-                        <p class="">Fill receiver information</p>
+                <div className="step">
+                    <div className="step-head">
+                        <h3 className="">STEP 2</h3>
+                        <p className="">Fill receiver information</p>
                         <hr />
                     </div>
-                    <div class="step-body">
-                        <img src={receiver1} class="img-fluid" alt="" srcset="" />
+                    <div className="step-body">
+                        <img src={receiver1} className="img-fluid" alt="" />
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-head">
-                        <h3 class="">STEP 3</h3>
-                        <p class="">Pay with your credit card or cryptocurrency</p>
+                <div className="step">
+                    <div className="step-head">
+                        <h3 className="">STEP 3</h3>
+                        <p className="">Pay with your credit card or cryptocurrency</p>
                         <hr />
                     </div>
-                    <div class="step-body">
-                        <img src={Bitcoin} class="img-fluid" alt="" srcset="" />
+                    <div className="step-body">
+                        <img src={Bitcoin} className="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
@@ -53,38 +53,38 @@ function Third() {
                     onSwiper={(swiper) => console.log(swiper)}
                 >
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 1</h3>
-                            <p class="">Create your account</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 1</h3>
+                            <p className="">Create your account</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={user1} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={user1} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 2</h3>
-                            <p class="">Fill receiver information</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 2</h3>
+                            <p className="">Fill receiver information</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={receiver1} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={receiver1} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 3</h3>
-                            <p class="">Pay with your credit card or cryptocurrency</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 3</h3>
+                            <p className="">Pay with your credit card or cryptocurrency</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={Bitcoin} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={Bitcoin} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>
@@ -99,38 +99,38 @@ function Third() {
                     onSwiper={(swiper) => console.log(swiper)}
                 >
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 1</h3>
-                            <p class="">Create your account</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 1</h3>
+                            <p className="">Create your account</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={user1} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={user1} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 2</h3>
-                            <p class="">Fill receiver information</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 2</h3>
+                            <p className="">Fill receiver information</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={receiver1} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={receiver1} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div class="step">
-                        <div class="step-head">
-                            <h3 class="">STEP 3</h3>
-                            <p class="">Pay with your credit card or cryptocurrency</p>
+                    <div className="step">
+                        <div className="step-head">
+                            <h3 className="">STEP 3</h3>
+                            <p className="">Pay with your credit card or cryptocurrency</p>
                             <hr />
                         </div>
-                        <div class="step-body">
-                            <img src={Bitcoin} class="img-fluid" alt="" srcset="" />
+                        <div className="step-body">
+                            <img src={Bitcoin} className="img-fluid" alt="" />
                         </div>
                     </div>
                 </SwiperSlide>

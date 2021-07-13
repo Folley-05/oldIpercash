@@ -29,7 +29,8 @@ taille des transaction :
 2 entrees 2 sorties : 434
 2 entrees 1 sorties : 402, 403
 1 entree 1 sortie : 222
-1 entree 2 sorties : 249, 226
+1 entrees 2 sorties : 249, 226
+3 entrees 2 sorties : 615
 
 
 les frais de transactions sont entre 4500 et 6000 satoshi

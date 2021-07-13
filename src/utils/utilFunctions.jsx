@@ -6,6 +6,14 @@ const roundDecimal=(nombre)=>{
     return Math.round( nombre*tmp )/tmp;
 }
 
+const trier=(tab, prop)=>tab.sort(function compare(a, b) {
+    if (a[prop] < b[prop])
+       return -1;
+    if (a[prop] > b[prop] )
+       return 1;
+    return 0;
+});
+
 const checkServiceId=num=>{
     console.log("le numero ",num)
     if(num[1]==='7') return 'mtn'
@@ -51,4 +59,4 @@ const cancel=()=>{
     alert("arret de toute activite, le processus a echoue")
 }
 
-export {roundDecimal, randomId, trackStatus, cancel, checkServiceId }
+export {roundDecimal, randomId, trackStatus, cancel, checkServiceId, trier }

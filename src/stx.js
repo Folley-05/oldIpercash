@@ -3,6 +3,7 @@ data=data.unspent_outputs
 // fonction qui parse la liste des utxo et ressort la meilleure formule a utiliser
 const parseUtxo=(amount, utxos)=>{
     //console.log(amount, utxos)
+    let todo=true
     let first=utxos.filter((data)=>data.value>=amount+3500)
     console.log(first)
     if(first.length) { // on utilise une entree
@@ -16,52 +17,114 @@ const parseUtxo=(amount, utxos)=>{
         })
         let utxo={n:first[indice].tx_output_n, id:first[indice].tx_hash_big_endian, value:first[indice].value}
         console.log(indice, utxo)
-        if(utxo.value>amount+5000) {
+        if(utxo.value>amount+6000) {
             console.log("2 sorties")
-            return {utxo: utxo, ouputs: 2}
+            todo=false
+            return {input: 1, utxo: utxo, ouputs: 2}
         }
         else {
             console.log("une sortie")
-            return {utxo: utxo, ouputs: 1}
+            todo=false
+            return {input: 1, utxo: utxo, ouputs: 1}
         }
     }
-    else {  // on utilise plusieurs entrees
-        console.log("on va utiliser plusieurs entrees")
+    if(todo) {  // on utilise plusieurs entrees
+        console.log("on cherche 2 entrees")
         let second=trier(utxos, 'value') // tableau de utxo trie par ordre croissant
-        console.log(second)
-        let inp=0
-        let sum=0
-        let i=0
-        let j=0
+        let ind={i: 0, j:0}
+        let i=0, j=0
         let witness=false
-        console.log(second[i+1].value)
         for(i=0; i<second.length-1; i++) {
-            console.log(i, witness)
             if(witness) {break}
             for(j=0; j<second.length; j++) {
                 if (i===j) {continue}
                 else {
                     if((second[i].value+second[j].value)>=(amount+4500)){
+                        ind={i: i, j: j}
                         witness=true
                         break
                     }
                 }
-                console.log(j)
             }
         }
-        /*while(!witness && (i<=second.length-2)) {
-            console.log("voici i ", i)
-            sum=second[i].value+second[i+1].value
-            if(sum>=amount+4500) witness=true
-            i++
-        }*/
         if(witness) {
-            console.log("on a trouve", i, j)
-            if(second[i].value+second[j].value>=amount+4500)
-                return {utxo1: second[i], utxo2: second[j], output: 2}
-            else return {utxo1: second[i], utxo2: second[j], output: 1}
+            console.log("on a trouve", ind)
+            i=ind.i
+            j=ind.j
+            if(second[i].value+second[j].value>=amount+7000){
+                todo=false
+                return {utxo1: { id:second[i].tx_hash_big_endian, n:second[i].tx_output_n, value:second[i].value },
+                        utxo2: { id:second[j].tx_hash_big_endian, n:second[j].tx_output_n, value:second[j].value },
+                        output: 2
+                    }
+            }
+            else {
+                todo=false
+                return {utxo1: { id:second[i].tx_hash_big_endian, n:second[i].tx_output_n, value:second[i].value },
+                        utxo2: { id:second[j].tx_hash_big_endian, n:second[j].tx_output_n, value:second[j].value },
+                        output: 1
+                    }
+            }
         }
-        else console.log("on a pas trouve")
+        else console.log("on a pas trouve ", witness)
+    }
+    if(todo) {
+        console.log("on a passe a trois entrees")
+        if(amount>=500000) {
+            let third=trier(utxos, 'value') // tableau de utxo trie par ordre croissant
+            let witness=false
+            let ind={i: 0, j:0, k: 0}
+            let i=0, j=0, k=0
+            for(i=0; i<third.length-2; i++) {
+                if(witness) {break}
+                for(j=0; j<third.length-1; j++) {
+                    if(witness){break}
+                    if (i===j || i===k || j===k) {continue}
+                    else {
+                        for(k=0; k<third.length; k++){
+                            if(witness){break}
+                            if (i===k || j===k) {continue}
+                            if((third[i].value+third[j].value+third[k].value)>=(amount+6000)){
+                                witness=true
+                                ind={i: i, j: j, k: k}
+                                console.log("trouve ", i, j, k)
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            if(witness) {
+                console.log("on a trouve", ind)
+                i=ind.i
+                j=ind.j
+                k=ind.k
+                if(third[i].value+third[j].value+third[j].value>=amount+8500){
+                    todo=false
+                    return {
+                        input: 3,
+                        utxo1: { id:third[i].tx_hash_big_endian, n:third[i].tx_output_n, value:third[i].value },
+                        utxo2: { id:third[j].tx_hash_big_endian, n:third[j].tx_output_n, value:third[j].value },
+                        utxo3: { id:third[k].tx_hash_big_endian, n:third[k].tx_output_n, value:third[k].value },
+                        output: 2
+                    }
+                }
+                else {
+                    todo=false
+                    return {
+                        input: 3,
+                        utxo1: { id:third[i].tx_hash_big_endian, n:third[i].tx_output_n, value:third[i].value },
+                        utxo2: { id:third[j].tx_hash_big_endian, n:third[j].tx_output_n, value:third[j].value },
+                        utxo3: { id:third[k].tx_hash_big_endian, n:third[k].tx_output_n, value:third[k].value },
+                        output: 1
+                    }
+                }
+            }
+            else console.log("on a pas trouve ", witness)
+        }
+        else {
+            console.log("le montant est trop bas on annule")
+        }
     } 
 }
 

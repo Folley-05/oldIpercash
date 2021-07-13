@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { FaCcVisa, FaCcMastercard } from 'react-icons/fa'
+import {useHistory} from 'react-router-dom'
+import { FaCcVisa, FaCcMastercard, FaCheck } from 'react-icons/fa'
+import { TiWarningOutline } from 'react-icons/ti'
 import { Modal } from 'react-responsive-modal';
 import ReactLoading from 'react-loading'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import StepContent from '@material-ui/core/StepContent'
 
 import './buycrypto.css'
 import SelectFloat from '../addons/select/SelectFloat'
 import InputFloat from '../addons/input/InputFloat'
 import CryptoRate from '../addons/cryptoRate/CryptoRate'
 
-import buy from '../../utils/buy'
 import {roundDecimal} from '../../utils/utilFunctions'
 
 
@@ -31,12 +28,9 @@ function BuyCrypto() {
         crypto: "BTC", operator: "", amount: 0, xaf: 0, eu: 0, rate: rate.BTC, number: "", confirmNumber: "", wallet: ""
     })
     const [modal, setModal] = useState(false)
+    const [valid, setValid] = useState(false)
     const openModal=()=>setModal(!modal)
-    const [step, setStep] = useState(0)
-    const changeStep=()=>{
-        console.log("change step")
-        setStep(step+1)
-    }
+    let history=useHistory()
     //on va charcher les bons taux de changes 
     // useEffect(() => {
     //     fetch(baseUrl, {method: 'GET'}).then(response=>response.json())
@@ -110,32 +104,33 @@ function BuyCrypto() {
         })
         if(icon!==null) return Icon[icon].icon
     }
+    // fonction qui verifie la correspondance des addresse
+    const checkAddress=e=>{
+        console.log("hello")
+        if(e.target.value===state.wallet) {
+            console.log("ils correspondent")
+            sessionStorage.clear()
+            sessionStorage.setItem('data', JSON.stringify(state))
+            setValid(true)
+            setTimeout(()=>history.push('/transact'), 2000)
+        }
+    }
     //console.log(modal);
     return (
         <div className="buy-crypto">
             <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
                 <div className="modal-head">
-                    <h2>transaction en cours </h2>
-                    <ReactLoading type="spinningBubbles" color='#000' height={50} width={50} />
+                    <TiWarningOutline size={70} color="#fbbd07" style={{verticalAlign: 'middle'}} />
+                    <h2>Verification de du wallet</h2>
                 </div>
-                <div className="content-modal">
-                    <Stepper orientation='vertical' activeStep={step}>
-                        <Step>
-                            <StepLabel>preparation des fonds</StepLabel>
-                            <StepContent>
-                                verification de la validite du wallet et de la presence de fonds
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            <StepLabel>reception du payment mobile</StepLabel>
-                            <StepContent>
-                                For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and geographical locations you want your ads to show on, and more.
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            <StepLabel>envoie des fonds</StepLabel>
-                        </Step>
-                    </Stepper>
+                <div className="modal-body">
+                    <div className="wallet-div">
+                        votre wallet <br/> <br/>
+                        {state.wallet}
+                    </div>
+                    <input type="text" placeholder="collez votre adresse ici" onChange={e=>checkAddress(e)} />
+                    {valid ? (<FaCheck size={50} color="#05e8a5" />) : (<ReactLoading type="spinningBubbles" color='#000' height={50} width={50} />)} 
+                    
                 </div>
             </Modal>
             <div className="buy-container">
@@ -169,7 +164,7 @@ function BuyCrypto() {
                         <InputFloat label="Crypto Wallet Address" theme="ligth" name="wallet" change={handleChange} />
                     </div>
                     <div className="buttonBox">
-                        <button disabled={active()} onClick={()=>buy(state, openModal, changeStep)}>Buy</button>
+                        <button disabled={active()} onClick={()=>openModal()}>Buy</button>
                     </div>
                 </div>
             </div>

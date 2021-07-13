@@ -9,12 +9,12 @@ function Footer() {
             <div className="details">
                 <div className="logo">
                     <div className="logo-footer">
-                        <img src={logo} alt="" srcset=""/>
+                        <img src={logo} alt=""/>
                     </div>
                 </div>
                 <div className="link">
-                    <h5 class="little-title">Links</h5>
-                    <ul class="list-unstyled">
+                    <h5 className="little-title">Links</h5>
+                    <ul className="list-unstyled">
                     <li>
                         <p>
                         <a target="_blank" href="../../assets/docs/TERMS_AND_CONDITIONS_2021.pdf">Terms & Conditions</a>
@@ -39,46 +39,46 @@ function Footer() {
                     <hr/>
                 </div>
                 <div className="address">
-                    <h5 class="little-title">Address</h5>
+                    <h5 className="little-title">Address</h5>
 
-                    <ul class="list-unstyled">
+                    <ul className="list-unstyled">
                     <li>
                         <p>
-                        <i class="fas fa-home mr-3"></i> 17, rue Pache 75011 Paris</p>
+                        <i className="fas fa-home mr-3"></i> 17, rue Pache 75011 Paris</p>
                     </li>
                     <li>
                         <p>
-                        <i class="fas fa-envelope mr-3"></i> info@ipercash.fr</p>
+                        <i className="fas fa-envelope mr-3"></i> info@ipercash.fr</p>
                     </li>
                     <li>
                         <p>
-                        <i class="fas fa-phone mr-3"></i> +33 9 70 46 04 46</p>
+                        <i className="fas fa-phone mr-3"></i> +33 9 70 46 04 46</p>
                     </li>
                     <li>
                         <p>
-                        <i class="fa fa-whatsapp mr-3" aria-hidden="true"></i> +33 7 56 92 26 96</p>
+                        <i className="fa fa-whatsapp mr-3" aria-hidden="true"></i> +33 7 56 92 26 96</p>
                     </li>
                     </ul>
                     <hr/>
                 </div>
                 <div className="follow">
-                    <h5 class="little-title">Follow Us</h5>
+                    <h5 className="little-title">Follow Us</h5>
 
-                    <a type="button" class="btn-floating btn-fb">
-                    <i class="fab fa-facebook-f"></i>
+                    <a type="button" className="btn-floating btn-fb">
+                    <i className="fab fa-facebook-f"></i>
                     </a>
-                    <a type="button" class="btn-floating btn-tw">
-                    <i class="fab fa-twitter"></i>
+                    <a type="button" className="btn-floating btn-tw">
+                    <i className="fab fa-twitter"></i>
                     </a> <br/>
-                    <a type="button" class="btn-floating btn-gplus">
-                    <i class="fab fa-google-plus-g"></i>
+                    <a type="button" className="btn-floating btn-gplus">
+                    <i className="fab fa-google-plus-g"></i>
                     </a>
-                    <a type="button" class="btn-floating btn-dribbble">
-                    <i class="fab fa-dribbble"></i>
+                    <a type="button" className="btn-floating btn-dribbble">
+                    <i className="fab fa-dribbble"></i>
                     </a>
                 </div>
             </div>
-            <div class="footer-copyright">
+            <div className="footer-copyright">
                 The website <a href="https://ipercash.fr/">www.ipercash.fr</a> is owned and operated by IPERCASH SAS
             </div>
         </div>

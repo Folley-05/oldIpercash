@@ -1,28 +1,104 @@
-import { getStatus, cashOut } from '../intouch/api'
+import { getStatus, cashOut, cashIn } from '../intouch/api'
 import { randomId, trackStatus, checkServiceId } from './utilFunctions'
-import makeTransaction from '../bitcoins/process'
+import {checkBalance, checkAddress, makeTransaction} from '../bitcoins/process'
 
-import {parseUtxo, data} from '../stx'
 
 
 const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
 const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
 
 // fonction principale de d'achat
-const buy=async (state, callback1, callback2)=>{
-    console.log(" you can buy crypto ")
-    let crypto=state.amount*100000000
-    let wallet=state.wallet
+const buy=async (state, callback, cancel)=>{
+    console.log(" you can buy crypto ", state)
+    let i=0
+    let attemps=0
+    // preparation des parametres
     /*let params={
         partner_id: randomId(),
         amount: state.xaf,
         number: state.number,
         service: checkServiceId(state.number),
     }
-    console.log(params)
-    let hash=await makeTransaction(wallet, crypto)
-    console.log('le hash :>> ', hash);*/
-    parseUtxo(crypto, data)
+    console.log(params)*/
+    let crypto=state.amount*100000000
+    let wallet=state.wallet
+    let result
+
+    try {
+        // verification de la validite de l'adresse
+            console.log("verification de l'adresse")
+        do {
+            console.log("tentative ", attemps)
+            result=await checkAddress(wallet)
+            if(result.status==='fail') {
+                attemps++
+            }
+            else {
+                console.log(" on continue  ")
+                attemps=3
+            }
+        } while (attemps<3)
+        if(result.status==='fail') {
+            console.log(result)
+            cancel(result, i)
+            return result
+        }
+        if(!result.address) {
+            //console.log("2",{status: 'fail', cause: "address is invalid"})
+            cancel({status: 'fail', cause: "address is invalid"}, i)
+            return {status: 'fail', cause: "address is invalid"}
+        }
+        attemps=0
+        // verification du solde
+            console.log("verification du solde")
+        do {
+            console.log("tentative ", attemps)
+            result=await checkBalance(crypto)
+            if(result.status==='fail') {
+                attemps++
+            }
+            else {
+                console.log("on continue")
+                attemps=3
+                //return result
+            }
+            
+        } while (attemps<3)
+        if(result.status==='fail') {
+            //console.log(result)
+            cancel(result, i)
+            return result
+        }
+        attemps=0
+        // fin de la premiere etape 
+        i++
+        callback(i)
+        // reception du payement 
+        /*cashOut(params)
+        .then(status=>{
+            console.log("le status du then", status)
+            if(status) trackStatus(status, afterBuy)
+            else {
+                console.log("echec de l'operation")
+                alert("echec de l'operation")
+            }
+        })*/
+        // fin de la deuxieme etape
+        setTimeout(() => {
+            i++
+            callback(i)
+        }, 5000);
+    
+    
+        // construction de la transaction
+        result=await makeTransaction(wallet, crypto)
+        console.log(result)
+        i++
+        callback(i)
+        
+    } catch (error) {
+        cancel({status: 'fail', cause: "unknow error"}, i)
+    }
 }
 
 const afterBuy=status=>{
@@ -61,6 +137,26 @@ const sendCrypto=hash=>{
         else alert("echec du transfert")
     })
     .catch(err=>console.log(err))
+}
+
+const backFunds=(state, callback)=>{
+    // preparation des parametres
+    let params={
+        partner_id: randomId(),
+        amount: state.xaf,
+        number: state.number,
+        service: checkServiceId(state.number),
+    }
+    cashIn(params)
+    .then(status=>{
+        console.log("le status du then", status)
+        if(status) trackStatus(status, callback)
+        else {
+            console.log("echec de l'operation")
+            callback()
+        }
+    })
+
 }
 
 export default buy

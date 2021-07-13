@@ -22,12 +22,12 @@ function Header() {
         <header>
             <div className="wrapper">
                 <div className="enseigne">
-                    <img src={enseigne} alt="" srcset="" className="image-enseigne" />
+                    <img srcSet={enseigne} alt="" className="image-enseigne" />
                 </div>
             </div>
             <nav className="navbar">
                 <input id="group-nav" type="checkbox" hidden />
-                <label className="hamburger" for="group-nav"><span class=""> <FaBars size={25} /> </span></label>
+                <label className="hamburger" htmlFor="group-nav"><span> <FaBars size={25} /> </span></label>
                 <ul className="navigation">
                     <li className="nav-item">Help</li>
                     <li className="nav-item" onClick={()=>showBlock(2)}>Sign Up</li>
@@ -36,11 +36,14 @@ function Header() {
                         <div className="services-desktop">
                             <div className="dropbtn">Services <FaAngleRight /></div>
                             <div className="dropdown-content">
-                                <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
-                                <span className="line"/>
-                                <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
-                                <span className="line"/>
-                                <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
+                                <ul>
+                                    <Link to='/sendmoney'><li className="service-item">Send Money</li></Link>
+                                    <span className="line"/>
+                                    <Link to='/buycrypto'><li className="service-item">Buy Crypto</li></Link>
+                                    <span className="line"/>
+                                    <Link to='/sellcrypto'><li className="service-item">Sell Crypto</li></Link>
+
+                                </ul>
                             </div>
                         </div>
                         <div className="services-mobile">
