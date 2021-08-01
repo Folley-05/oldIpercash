@@ -17,13 +17,14 @@ const makeTransaction=async (recipient, amount)=>{
 }
 
 // fonction qui verifie la presence des fonds
-const checkBalance=async (amount)=>fetch('https://api.smartbit.com.au/v1/blockchain/address/1Q6WwGjuiPwXZV8uwGbvXERbpSNdJEXZ47')
+let address='1DnKzNhp5JQyQRNPHP4coekGcA7KpnPzji'
+const checkBalance=async (amount)=>fetch('https://api.smartbit.com.au/v1/blockchain/address/'+address)
     .then(response=>response.json())
     .then(data=>{
         if(data.success) {
             console.log(data)
             console.log(data.address.total.balance_int)
-            if(data.address.total.balance_int>amount+7500) {
+            if(data.address.total.balance_int>amount+4000) { // en production c'est 7500
                 return {status: "success"}
             }
             else return {status: 'fail', cause: 'not enough funds'}

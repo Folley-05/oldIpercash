@@ -1,5 +1,5 @@
 import { getStatus, cashOut, cashIn } from '../intouch/api'
-import { randomId, trackStatus, checkServiceId } from './utilFunctions'
+import { randomId, trackStatus, checkServiceId, trackStatus2 } from './utilFunctions'
 import {checkBalance, checkAddress, makeTransaction} from '../bitcoins/process'
 
 
@@ -13,16 +13,17 @@ const buy=async (state, callback, cancel)=>{
     let i=0
     let attemps=0
     // preparation des parametres
-    /*let params={
+    let params={
         partner_id: randomId(),
         amount: state.xaf,
         number: state.number,
         service: checkServiceId(state.number),
     }
-    console.log(params)*/
+    console.log(params)
     let crypto=state.amount*100000000
     let wallet=state.wallet
-    let result
+    let result, partner_id
+
 
     try {
         // verification de la validite de l'adresse
@@ -73,45 +74,58 @@ const buy=async (state, callback, cancel)=>{
         // fin de la premiere etape 
         i++
         callback(i)
+
         // reception du payement 
-        /*cashOut(params)
-        .then(status=>{
-            console.log("le status du then", status)
-            if(status) trackStatus(status, afterBuy)
-            else {
-                console.log("echec de l'operation")
-                alert("echec de l'operation")
-            }
-        })*/
-        // fin de la deuxieme etape
-        setTimeout(() => {
-            i++
-            callback(i)
-        }, 5000);
-    
-    
-        // construction de la transaction
-        result=await makeTransaction(wallet, crypto)
-        console.log(result)
-        i++
-        callback(i)
+        /*do {
+            console.log("tentative ", attemps)
+            partner_id=await cashOut(params)
+            partner_id ? attemps=3 : attemps++
+        } while (attemps<3);
+        if(partner_id) {
+            trackStatus(partner_id, ()=>afterBuy(i, callback, wallet, crypto, cancel), cancel)
+            //afterBuy(i, callback, wallet, crypto, cancel)
+        }
+        else {
+            cancel({status: 'fail', cause: "payment demand has fail"}, i)
+            return 10
+        }*/
+        
+        afterBuy(i, callback, wallet, crypto, cancel)
         
     } catch (error) {
         cancel({status: 'fail', cause: "unknow error"}, i)
     }
 }
 
-const afterBuy=status=>{
-    if(status==="SUCCESSFUL") {
-        console.log("payment recu tranfert des bitcoins")
-        let hash=makeTransaction()
-        console.log('le hash :>> ', hash)
-        sendCrypto(hash)
+const afterBuy=async (i, callback, wallet, crypto, cancel)=>{
+    let result
+    // fin de la deuxieme etape
+    i++
+    callback(i)
+
+    // construction de la transaction
+    result=await makeTransaction(wallet, crypto)
+    if(result.status==='fail') {
+        console.log("echec de la construction")
+        cancel(result, i)
+        return result
     }
-    else {
-        console.log("echec du payment")
-        alert("echec du payment")
+    console.log(result)
+    i++
+    callback(i)
+
+    //throw("ma propre erreur cool")
+
+    // envoie de la transaction
+    console.log("faut reactiver send crypto")
+    //result=await sendCrypto(result.hash)
+    console.log("final result", result)
+    if(result.status==='fail') {
+        console.log("echec du trensfert")
+        cancel(result, i)
     }
+    i++
+    callback(i)
 }
 
 
@@ -130,13 +144,17 @@ const sendCrypto=hash=>{
         }
     }
     console.log("la transaction va etre envoyee")
-    fetch(testNetUrl, requestOption)
+    return fetch(mainNetUrl, requestOption)
     .then(res=>res.json()).then(data=>{
         console.log(data)
-        if(data.success) alert("transfert de bitcoin effectue")
-        else alert("echec du transfert")
+        if(data.success) {
+            return {status: 'success', tx: data}
+        }
+        else {
+            return {status: 'fail', cause: data.error.message}
+        }
     })
-    .catch(err=>console.log(err))
+    .catch(err=>({status: 'fail', cause: "can not push transaction"}))
 }
 
 const backFunds=(state, callback)=>{

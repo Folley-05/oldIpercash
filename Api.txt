@@ -59,6 +59,8 @@ ma transaction sur le mainnet : 0dfbb826e7ded222dbc61f1f67f261edfc02ed6f31482779
 
 premier test avec mr feuzeu txid: 8363a9780a6591ebdf8376136bd2d19aa313f286e6796535afc9f786d292dbcc
 
+ma transaction du 14 avec monsieur feuzeu 7575a57526f418f8ce2e7a05e781764ce8d3e53ace466457c43cc45b20dd72a9
+
 la transaction sur pulsa
 0bef727d2eb1245c2555d84b410ff070bcdcbf66ba3ade4541992dbd60281e43
 

@@ -1,11 +1,21 @@
+// le code du buy 
+
+import { getStatus, cashOut, cashIn } from '../intouch/api'
+import { randomId, trackStatus, checkServiceId, trackStatus2 } from './utilFunctions'
+import {checkBalance, checkAddress, makeTransaction} from '../bitcoins/process'
+
+
+
+const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
+const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
 
 // fonction principale de d'achat
-const buy=(state, callback1, callback2)=>{
-    console.log(" you can buy crypto ")
-    /*callback1()
-    setTimeout(() => {
-        callback2()
-    }, 3000);*/
+const buy=async (state, callback, cancel)=>{
+
+    console.log(" you can buy crypto ", state)
+    let i=0
+    let attemps=0
+    // preparation des parametres
     let params={
         partner_id: randomId(),
         amount: state.xaf,
@@ -13,43 +23,151 @@ const buy=(state, callback1, callback2)=>{
         service: checkServiceId(state.number),
     }
     console.log(params)
-    
-    //console.log(checkServiceId(params.number))
-    /*cashOut(params)
-    .then(status=>{
-        console.log("le status du then", status)
-        if(status) trackStatus(status, afterBuy)
-        else {
-            console.log("echec de l'operation")
-            alert("echec de l'operation")
+    let crypto=state.amount*100000000
+    let wallet=state.wallet
+    let result, partner_id
+
+
+    try {
+        // verification de la validite de l'adresse
+            console.log("verification de l'adresse")
+        do {
+            console.log("tentative ", attemps)
+            result=await checkAddress(wallet)
+            if(result.status==='fail') {
+                attemps++
+            }
+            else {
+                console.log(" on continue  ")
+                attemps=3
+            }
+        } while (attemps<3)
+        if(result.status==='fail') {
+            console.log(result)
+            cancel(result, i)
+            return result
         }
-    })*/
+        if(!result.address) {
+            //console.log("2",{status: 'fail', cause: "address is invalid"})
+            cancel({status: 'fail', cause: "address is invalid"}, i)
+            return {status: 'fail', cause: "address is invalid"}
+        }
+        attemps=0
+        // verification du solde
+            console.log("verification du solde")
+        do {
+            console.log("tentative ", attemps)
+            result=await checkBalance(crypto)
+            if(result.status==='fail') {
+                attemps++
+            }
+            else {
+                console.log("on continue")
+                attemps=3
+                //return result
+            }
+            
+        } while (attemps<3)
+        if(result.status==='fail') {
+            //console.log(result)
+            cancel(result, i)
+            return result
+        }
+        attemps=0
+        // fin de la premiere etape 
+        i++
+        callback(i)
+
+        // reception du payement 
+        /*do {
+            console.log("tentative ", attemps)
+            partner_id=await cashOut(params)
+            partner_id ? attemps=3 : attemps++
+        } while (attemps<3);*/
+        
+
+        // fin de la deuxieme etape
+        i++
+        callback(i)
+    
+        // construction de la transaction
+        result=await makeTransaction(wallet, crypto)
+        if(result.status==='fail') {
+            console.log("echec de la construction")
+            cancel(result, i)
+            return result
+        }
+        console.log(result)
+        i++
+        callback(i)
+
+        //throw("ma propre erreur cool")
+
+        // envoie de la transaction
+        result=await sendCrypto(result.hash)
+        console.log("final result", result)
+        if(result.status==='fail') {
+            console.log("echec du trensfert")
+            cancel(result, i)
+        }
+        i++
+        callback(i)
+        
+    } catch (error) {
+        cancel({status: 'fail', cause: "unknow error"}, i)
+    }
+}
+
+const afterBuy=status=>{
 }
 
 
-// le code du modal
-            <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
-                <div className="modal-head">
-                    <h2>transaction en cours </h2>
-                    <ReactLoading type="spinningBubbles" color='#000' height={50} width={50} />
-                </div>
-                <div className="content-modal">
-                    <Stepper orientation='vertical' activeStep={step}>
-                        <Step>
-                            <StepLabel>preparation des fonds</StepLabel>
-                            <StepContent>
-                                verification de la validite du wallet et de la presence de fonds
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            <StepLabel>reception du payment mobile</StepLabel>
-                            <StepContent>
-                                For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and geographical locations you want your ads to show on, and more.
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            <StepLabel>envoie des fonds</StepLabel>
-                        </Step>
-                    </Stepper>
-                </div>
-            </Modal>
+const sendCrypto=hash=>{
+    console.log("send bitcointest")
+    // let hex='0200000001352ffac305c57d14e3e1570ddba810b47609f5c04c4daf0e99c763c459104f74000000008a47304402202ac5e8498c7bac477952a7fb63fad616841329267bfc658cc10bdcb1f4c7304b02202f401e97f1f73be256fd7f17f2de785dcaeecd205f1ab5c669140e23923622210141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff01d07c2b00000000001976a9145cfde21a42acd074450a247d28aecafad58c95c688ac00000000'
+    // let form=new FormData()
+    // let myHeaders=new Headers()
+    // form.append('hex', hex)
+    let data={ hex: hash }
+    let requestOption={
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            Accept: 'application/json'
+        }
+    }
+    console.log("la transaction va etre envoyee")
+    return fetch(testNetUrl, requestOption)
+    .then(res=>res.json()).then(data=>{
+        console.log(data)
+        if(data.success) {
+            return {status: 'success', tx: data}
+        }
+        else {
+            return {status: 'fail', cause: data.error.message}
+        }
+    })
+    .catch(err=>({status: 'fail', cause: "can not push transaction"}))
+}
+
+const backFunds=(state, callback)=>{
+    // preparation des parametres
+    let params={
+        partner_id: randomId(),
+        amount: state.xaf,
+        number: state.number,
+        service: checkServiceId(state.number),
+    }
+    cashIn(params)
+    .then(status=>{
+        console.log("le status du then", status)
+        if(status) trackStatus(status, callback)
+        else {
+            console.log("echec de l'operation")
+            callback()
+        }
+    })
+
+}
+
+export default buy

@@ -2,24 +2,57 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 
+import { randomId, randomChain } from '../../utils/utilFunctions'
+
 import './sendmoney.css'
 import InputFloat from '../addons/input/InputFloat'
+import Modal from './Modal'
+
+// import {mercuryoWidget} from 'https://widget.mercuryo.io/embed.2.0.js'
 
 function SendMoney({amount}) {
     const [state, setState] = useState({
         montant: amount, name: "", phone: "", cPhone: ""
     })
+    const [modal, setModal] = useState({open: false, closable: false, operationId: null, status: null})
     const handleChange=e=>{
         console.log(e.name);
         let newState=state
         newState[e.name]=e.value
         setState({...state})
     }
+    let apiUrl='https://ipercash-api.herokuapp.com/'
     const send=()=>{
-        ramp()
+        //ramp()
+        console.log(state)
+        let params={"transaction_id":randomId(), "phone": state.phone, "name": state.name}
+        const requestOption={
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            "body": JSON.stringify(params)
+        }
+        setModal({...modal, open: true, closable: false, operationId: params.transaction_id})
+        fetch(apiUrl+'api/init', requestOption)
+        .then(response=>response.json()).then(data=>{
+            console.log(data)
+            window.open(apiUrl+'hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+        })
+        .then(async ()=>{
+            let notdo=false
+            do {
+                notdo= await fetch(apiUrl+'api/getpayload', setRequestOption({transaction: params.transaction_id}))
+                .then(response=>response.json()).then(data=>data.mobile_paid)
+                .catch(err=>false)
+            } while (notdo);
+        })
+        .catch(err=>console.log(" une erreur est survenu "))
+
     }
     const active=()=>{
-        if(state.montant > 10 && state.name && state.phone) return false
+        if(state.montant > 10 && state.name &&  state.phone && (state.phone===state.cPhone)) return false
         else return true
     }
     const ramp=()=>{
@@ -44,10 +77,73 @@ function SendMoney({amount}) {
         .show()
     }
     console.log(amount)
-    
+
+    const test=()=>{
+        console.log("hello")
+        const payload=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\"06b15e045b8314822\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"paid\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
+        console.log(payload)
+        const requestOption={
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            "body": JSON.stringify(payload)
+        }
+        fetch('http://127.0.0.1:8000/api/test', requestOption)
+        .then(response=>response.json()).then(data=>console.log(data))
+    }
+    const beforeTest=()=>{
+        window.open('http://127.0.0.1:8000/test?d='+randomChain()+';'+state.montant*0.579+';'+"randomhere", '_blank')
+    }
+    const setRequestOption=body=>({
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            // "mode":"no-cors"
+        },
+        "body": JSON.stringify(body)
+    })
+
+    const simulate=()=>{
+        console.log(" start emulation ")
+        let idt=randomId()
+        let params={"transaction_id":idt, "phone": state.phone, "name": state.name}
+        const payload1=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"new\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
+        const payload2=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"pending\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
+        const payload3=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"paid\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
+        const payload4=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"cancelled\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
+        
+        setModal({...modal, open: true, closable: false, operationId: params.transaction_id})
+        fetch('http://127.0.0.1:8000/api/init', setRequestOption(params))
+        .then(response=>response.json()).then(()=>{
+            //window.open('https://ipercash-api.herokuapp.com/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+            window.open('http://127.0.0.1:8000/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+            fetch('http://127.0.0.1:8000/api/test', setRequestOption(payload1))
+            .then(()=>{
+                fetch('http://127.0.0.1:8000/api/test', setRequestOption(payload2))
+                .then(()=>{
+                    fetch('http://127.0.0.1:8000/api/test', setRequestOption(payload3))
+                    .then(response=>response.json()).then(data=>{
+                        console.log("le payment est effectue ", data)
+                        console.log("l'argent va etre envoye dans le compte")
+                        setModal({operationId: params.transaction_id, open: true, closable: true, status: 'success' })
+                    })
+                    .catch(()=>console.log("erreur de la payload paid"))
+                })
+                .catch(()=>console.log("erreur de la payload pending"))
+            })
+            .catch(()=>console.log("erreur lors de la payload new"))
+
+        })
+        .catch(err=>console.log("une erreur est survenu : ", err))
+
+    }
 
     return (
         <>
+        <Modal option={modal} close={()=>setModal({open: false, closable: false})}  />
         <div className="send-money">
             <div className="receiver-info">
                 <div className="form-container">
@@ -75,6 +171,13 @@ function SendMoney({amount}) {
                         <div className="buttonbox">
                             <button disabled={active()} onClick={send}>Continue</button>
                         </div>
+                        <div className="buttonbox">
+                            <button disabled={active()} onClick={simulate}>simulate</button>
+                        </div>
+                        <div className="buttonbox">
+                            <button onClick={beforeTest}>before</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -103,6 +206,8 @@ function SendMoney({amount}) {
                 </div>
             </div>
         </div>
+    <div id="mercuryo-widget"></div>
+
         </>
     )
 }

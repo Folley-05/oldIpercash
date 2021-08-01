@@ -1,0 +1,14 @@
+.customOverlay {
+    background: rgba(36, 145, 160, 0.7) !important;
+}
+.customModal {
+    background: #b2dbbf;
+    max-width: 500px;
+    width: 100%;
+}
+.content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -16,8 +17,12 @@ function Pay() {
     //const [state, setState] = useState({initialState})
     const [step, setStep] = useState(0)
     const [trace, setTrace] = useState({status: false, error: null, traceStep: 0, backFund: true})
+    let history=useHistory()
     useEffect(() => {
-        buy(JSON.parse(sessionStorage.getItem('data')), changeStep, cancel)
+        let data=JSON.parse(sessionStorage.getItem('data'))
+        console.log(history)
+        data ? buy(data, changeStep, cancel) : history.goBack()
+        sessionStorage.clear()
     }, [])
 
     const changeStep=(indice)=>{
@@ -27,7 +32,7 @@ function Pay() {
     const start=()=>console.log("ca commence")
     const cancel=(data, i)=>{
         console.log("echec de l'operation")
-        let witness= i>2
+        let witness= i>1
         setTrace({status: true, error: data, traceStep: i, backFund: witness})
     }
     const setIcon=(i, num)=>{
