@@ -1,11 +1,12 @@
-import { getStatus, cashOut, cashIn } from '../intouch/api'
+import { cashOut, cashIn } from '../intouch/api'
 import { randomId, trackStatus, checkServiceId, trackStatus2 } from './utilFunctions'
-import {checkBalance, checkAddress, makeTransaction} from '../bitcoins/process'
+import {checkBalance, checkAddress } from '../bitcoins/process'
+
+import crypt from './crypt'
 
 
-
-const mainNetUrl="https://api.smartbit.com.au/v1/blockchain/pushtx"
-const testNetUrl="https://testnet-api.smartbit.com.au/v1/blockchain/pushtx"
+const mainNetUrl='https://api.blockcypher.com/v1/btc/main/txs/push'
+const testNetUrl='https://api.blockcypher.com/v1/btc/test3/txs/push'
 
 // fonction principale de d'achat
 const buy=async (state, callback, cancel)=>{
@@ -19,11 +20,13 @@ const buy=async (state, callback, cancel)=>{
         number: state.number,
         service: checkServiceId(state.number),
     }
-    console.log(params)
+    //console.log(params)
     let crypto=state.amount*100000000
     let wallet=state.wallet
     let result, partner_id
 
+    // sendCrypto("02000000011ad740cee301732b0c5de22f7357683d12971a0840e5e9fff620fcf3515ce160010000006a473044022039ce9469d60d06ca0b39265e58cbbabbac70e029a474d15724beab873189583b02200c96fa922c508debdfbfbb8df78aca8cff4cc109aa4bc167241467f3c012b7710121020ad877f83e6160bca0007e8f6e9aaeef6c8cf1edb239780b529e120b0204bb90ffffffff02744f0000000000001976a9141fc1487680f717cc5be6341a5739acfa48da169688ac843f0000000000001976a9148c34143e9cb703963488a8bf1458cf36fd5af21388ac00000000")
+    // return
 
     try {
         // verification de la validite de l'adresse
@@ -44,11 +47,7 @@ const buy=async (state, callback, cancel)=>{
             cancel(result, i)
             return result
         }
-        if(!result.address) {
-            //console.log("2",{status: 'fail', cause: "address is invalid"})
-            cancel({status: 'fail', cause: "address is invalid"}, i)
-            return {status: 'fail', cause: "address is invalid"}
-        }
+        // fin de la verification de l'adresse
         attemps=0
         // verification du solde
             console.log("verification du solde")
@@ -61,7 +60,6 @@ const buy=async (state, callback, cancel)=>{
             else {
                 console.log("on continue")
                 attemps=3
-                //return result
             }
             
         } while (attemps<3)
@@ -75,7 +73,7 @@ const buy=async (state, callback, cancel)=>{
         i++
         callback(i)
 
-        // reception du payement 
+        // reception du payment
         /*do {
             console.log("tentative ", attemps)
             partner_id=await cashOut(params)
@@ -83,7 +81,6 @@ const buy=async (state, callback, cancel)=>{
         } while (attemps<3);
         if(partner_id) {
             trackStatus(partner_id, ()=>afterBuy(i, callback, wallet, crypto, cancel), cancel)
-            //afterBuy(i, callback, wallet, crypto, cancel)
         }
         else {
             cancel({status: 'fail', cause: "payment demand has fail"}, i)
@@ -91,26 +88,32 @@ const buy=async (state, callback, cancel)=>{
         }*/
         
         afterBuy(i, callback, wallet, crypto, cancel)
+        return
+
         
     } catch (error) {
         cancel({status: 'fail', cause: "unknow error"}, i)
+        console.log("l'erreur", error)
     }
 }
 
 const afterBuy=async (i, callback, wallet, crypto, cancel)=>{
+    
     let result
     // fin de la deuxieme etape
     i++
     callback(i)
+    
+    console.log("on entre dans after buy")
 
     // construction de la transaction
-    result=await makeTransaction(wallet, crypto)
+    result=await getHash(wallet, crypto)
     if(result.status==='fail') {
         console.log("echec de la construction")
         cancel(result, i)
         return result
     }
-    console.log(result)
+    console.log("construction reussie ",result)
     i++
     callback(i)
 
@@ -118,7 +121,7 @@ const afterBuy=async (i, callback, wallet, crypto, cancel)=>{
 
     // envoie de la transaction
     console.log("faut reactiver send crypto")
-    //result=await sendCrypto(result.hash)
+    result=await sendCrypto(result.hash)
     console.log("final result", result)
     if(result.status==='fail') {
         console.log("echec du trensfert")
@@ -129,32 +132,18 @@ const afterBuy=async (i, callback, wallet, crypto, cancel)=>{
 }
 
 
-const sendCrypto=hash=>{
-    console.log("send bitcointest")
-    // let hex='0200000001352ffac305c57d14e3e1570ddba810b47609f5c04c4daf0e99c763c459104f74000000008a47304402202ac5e8498c7bac477952a7fb63fad616841329267bfc658cc10bdcb1f4c7304b02202f401e97f1f73be256fd7f17f2de785dcaeecd205f1ab5c669140e23923622210141046d08fcaf97148dbd6ab9ab3a00e83afd95ad471d8e57e64ae7496e60cc173aa60b8bae5a3c9bd75e6ff666449b839a3beea591aa0394d3401184d7b978b6e768ffffffff01d07c2b00000000001976a9145cfde21a42acd074450a247d28aecafad58c95c688ac00000000'
-    // let form=new FormData()
-    // let myHeaders=new Headers()
-    // form.append('hex', hex)
-    let data={ hex: hash }
-    let requestOption={
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            Accept: 'application/json'
-        }
+const sendCrypto=async (hash)=>{
+    console.log("send bitcoin")
+    var decodetx={
+        tx: hash
     }
-    console.log("la transaction va etre envoyee")
-    return fetch(mainNetUrl, requestOption)
-    .then(res=>res.json()).then(data=>{
+    return await fetch(mainNetUrl, {method: "POST", body: JSON.stringify(decodetx) })
+    .then(response=>response.json())
+    .then(data=>{
         console.log(data)
-        if(data.success) {
-            return {status: 'success', tx: data}
-        }
-        else {
-            return {status: 'fail', cause: data.error.message}
-        }
+        if(data.tx) return {status: 'success', txid: data.tx.hash}
+        else return {status: 'fail', cause: "can't send fund"}
     })
-    .catch(err=>({status: 'fail', cause: "can not push transaction"}))
 }
 
 const backFunds=(state, callback)=>{
@@ -175,6 +164,23 @@ const backFunds=(state, callback)=>{
         }
     })
 
+}
+
+const getHash=async (wallet, crypto)=>{
+    let params={recipient: wallet, amount: crypto}
+    params=JSON.stringify(params)
+    let send=crypt(params)
+    console.log("ce que j'envoie ", send)
+    return await fetch("http://localhost:4001/api/hash", {
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": JSON.stringify({send})
+    })
+    .then(response => response.json())
+    .then(data=>data.response)
+    .catch(err => ({status: 'fail', cause: "can't get hash"}));
 }
 
 export default buy

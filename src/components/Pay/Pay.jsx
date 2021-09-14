@@ -18,11 +18,11 @@ function Pay() {
     const [step, setStep] = useState(0)
     const [trace, setTrace] = useState({status: false, error: null, traceStep: 0, backFund: true})
     let history=useHistory()
-    useEffect(() => {
+    useEffect(async() => {
         let data=JSON.parse(sessionStorage.getItem('data'))
-        console.log(history)
+        //console.log(history)
         data ? buy(data, changeStep, cancel) : history.goBack()
-        sessionStorage.clear()
+        //sessionStorage.clear()
     }, [])
 
     const changeStep=(indice)=>{
@@ -42,6 +42,8 @@ function Pay() {
     }
     const backFunds=()=>console.log(" renvoi des fonds ")
     console.log('step :>> ', step)
+
+
 
     return trace.status ? ( 
         <div className="error">

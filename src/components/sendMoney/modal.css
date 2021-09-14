@@ -2,13 +2,19 @@
     background: rgba(36, 145, 160, 0.7) !important;
 }
 .customModal {
-    background: #b2dbbf;
     max-width: 500px;
-    width: 100%;
+    width: 50vw;
+    text-align: center;
 }
 .content {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+.content p {
+    width: 98%;
+    margin: auto;
+    overflow: hidden;
 }

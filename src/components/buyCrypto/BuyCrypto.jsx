@@ -5,8 +5,11 @@ import { TiWarningOutline } from 'react-icons/ti'
 import { Modal } from 'react-responsive-modal';
 import ReactLoading from 'react-loading'
 
+import axios from 'axios'
+
+import crypt from '../../utils/crypt'
+
 import './buycrypto.css'
-import SelectFloat from '../addons/select/SelectFloat'
 import InputFloat from '../addons/input/InputFloat'
 import CryptoRate from '../addons/cryptoRate/CryptoRate'
 
@@ -116,6 +119,26 @@ function BuyCrypto() {
         }
     }
     //console.log(modal);
+
+
+    const testcrypt=async ()=>{
+        const mainUrl='http://localhost:4001/api/test'
+        console.log("start")
+
+        fetch("http://localhost:4001/api/test", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": "{\"recipient\":\"3KVoREP8fghsxY2mfhcn2YoMDJCKSdxMxV\",\"amount\":560}"
+        })
+        .then(response => {
+        console.log(response);
+        })
+        .catch(err => {
+        console.error(err);
+        });
+    }
     return (
         <div className="buy-crypto">
             <Modal open={modal} onClose={()=>setModal(!modal)} showCloseIcon={false} center classNames={{modal: 'custom-modal'}}>
@@ -165,6 +188,9 @@ function BuyCrypto() {
                     </div>
                     <div className="buttonBox">
                         <button disabled={active()} onClick={()=>openModal()}>Buy</button>
+                    </div>
+                    <div className="buttonBox">
+                        <button onClick={testcrypt}>test</button>
                     </div>
                 </div>
             </div>

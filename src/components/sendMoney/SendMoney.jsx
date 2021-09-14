@@ -35,10 +35,11 @@ function SendMoney({amount}) {
             "body": JSON.stringify(params)
         }
         setModal({...modal, open: true, closable: false, operationId: params.transaction_id})
+        window.open(apiUrl+'hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+
         fetch(apiUrl+'api/init', requestOption)
         .then(response=>response.json()).then(data=>{
             console.log(data)
-            window.open(apiUrl+'hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
         })
         .then(async ()=>{
             let notdo=false
@@ -115,11 +116,17 @@ function SendMoney({amount}) {
         const payload3=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"paid\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
         const payload4=JSON.parse("{\"eventId\":\"bf16c4fe-c400-418c-8dad-2df79b500d2d\",\"data\":{\"id\":\"06b15e045b8314822\",\"merchant_transaction_id\":\""+idt+"\",\"created_at\":\"2021-07-20 14:53:56\",\"updated_at\":\"2021-07-20 14:53:56\",\"type\":\"buy\",\"currency\":\"BTC\",\"amount\":\"0.00240125\",\"fiat_currency\":\"EUR\",\"fiat_amount\":\"25.00\",\"status\":\"cancelled\",\"created_at_ts\":1626792836,\"updated_at_ts\":1626792836,\"user\":{\"uuid4\":null,\"country_code\":null},\"card\":{\"number\":\"4321\"}}}")      
         
+
+        //window.open('http://127.0.0.1:8000/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+        /*let timeout=setTimeout(() => {
+            window.open('http://127.0.0.1:8000/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
+        }, 3000);*/
+
         setModal({...modal, open: true, closable: false, operationId: params.transaction_id})
+        console.log("debut de fetch")
         fetch('http://127.0.0.1:8000/api/init', setRequestOption(params))
         .then(response=>response.json()).then(()=>{
             //window.open('https://ipercash-api.herokuapp.com/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
-            window.open('http://127.0.0.1:8000/hello?d='+randomChain()+';'+state.montant*0.579+';'+params.transaction_id, '_blank')
             fetch('http://127.0.0.1:8000/api/test', setRequestOption(payload1))
             .then(()=>{
                 fetch('http://127.0.0.1:8000/api/test', setRequestOption(payload2))
@@ -137,7 +144,10 @@ function SendMoney({amount}) {
             .catch(()=>console.log("erreur lors de la payload new"))
 
         })
-        .catch(err=>console.log("une erreur est survenu : ", err))
+        .catch(err=>{
+            console.log("une erreur est survenu : ", err)
+            //clearTimeout(timeout)
+        })
 
     }
 

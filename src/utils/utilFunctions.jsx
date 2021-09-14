@@ -39,23 +39,39 @@ const randomChain=()=>{
 
 const trackStatus=async (id, callBack, cancel)=>{
     console.log("trackstatus")
-    let valid=false
+    let valid=true
     let status="PENDING"
+    let i=1
     //getStatus(id)
     let interval=setInterval(async() => {
         let newStatus=await getStatus(id)
-        if(newStatus!==status) {
-            console.log("l'operation est terminee")
+        console.log("je suis i", i)
+        if(valid) {
+            console.log("on entre sans tocker")
+            if(newStatus!==status) {
+                valid=false
+                console.log("l'operation est terminee ", newStatus)
+                clearInterval(interval)
+                if(newStatus==='SUCCESSFUL') {
+                    callBack()
+                    return
+                }
+                else cancel({status: 'fail', cause: 'payment process fail'}, 1)
+            }
+            i++
+        } else {
             clearInterval(interval)
-            if(newStatus==='SUCCESSFUL') callBack()
-            else cancel({status: 'fail', cause: 'payment process fail'}, 1)
+            console.log("on a encore efface l'intervalle")
         }
         //console.log("le status  de trackstatus: ", newStatus)
-    }, 5000); // en production il faudra mettre 10 secondes
+    }, 10000); // en production il faudra mettre 10 secondes
     setTimeout(() => {
-        clearInterval(interval)
-        cancel({status: 'fail', cause: 'payment process fail'}, 1)
-    }, 3*60*1000); // en production c'est 5*60
+        if(valid) {
+            console.log("arret des operations")
+            clearInterval(interval)
+            cancel({status: 'fail', cause: 'payment process fail'}, 1)
+        }
+    }, 2*60*1000); // en production c'est 5*60
 }
 
 const trackStatus2=async (id)=>{

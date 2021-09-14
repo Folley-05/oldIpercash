@@ -18,7 +18,7 @@ function CoverModal({option, close}) {
             <div className="content">
                 <h1> Transfert en cours </h1>
                 <p>
-                    l'identifiant de votre operation est <b> { option.operationId } </b> utilisez le pour toute revendication
+                    l'identifiant de votre operation est <b> { option.operationId } </b> <br/> utilisez le pour toute revendication
                 </p>
                 {option.status==='success' ? (<FaCheck size={50} color='#05e8a5' />) : (<ReactLoading type="spinningBubbles" color='#05e8a5' height='100px' width='100px' />) }
                 
